@@ -1,4 +1,4 @@
-var defaultPath = null, isSutoSave = true;
+
 var fs = require('fs'),
     { shell } = require('electron'),
     { dialog } = require('electron').remote,
@@ -7,10 +7,15 @@ var fs = require('fs'),
     ver = require('../version'),
     http = require('http');
 
+var path = require('path');
+
+var defaultPath = path.resolve(__dirname, '../files'), isSutoSave = false,curFileName = null;
+
 function readFile(fileName) {
     if (!fileName) return;
 
-    defaultPath = fileName;
+    //defaultPath = fileName;
+    curFileName = fileName;
 
     fs.readFile(fileName, 'utf8', function (err, data) {
         var json = JSON.parse(data);
@@ -46,7 +51,7 @@ function hasData() {
 }
 
 function initRoot() {
-    defaultPath = null;
+    //defaultPath = null;
     editor.minder.importJson({ "root": { "data": { "text": "中心主题" } }, "template": "filetree", "theme": "fresh-blue" });
     editor.minder.select(minder.getRoot(), true);
 }
@@ -67,15 +72,16 @@ function openDialog() {
 }
 
 function saveDialog() {
-    if (defaultPath) {
+    if (curFileName) {
         var json = editor.minder.exportJson();
         var data = JSON.stringify(editor.minder.exportJson());
-        writeFile(defaultPath, data);
+        writeFile(curFileName, data);
 
     } else { saveAsDialog(); }
 }
 
 function saveAsDialog() {
+	console.log('defaultPath',defaultPath);
     dialog.showSaveDialog(
         {
             title: "保存 KityMinder 文件",
@@ -85,7 +91,7 @@ function saveAsDialog() {
         (fileName) => {
             if (!fileName) { return; }// cancel save
 
-            defaultPath = fileName;
+            curFileName = fileName;
 
             var json = editor.minder.exportJson();
             var data = JSON.stringify(editor.minder.exportJson());
@@ -158,6 +164,18 @@ function maxwin() {
 
 function minwin() {
     BrowserWindow.getAllWindows()[0].minimize();
+}
+function showDev() {
+    BrowserWindow.getAllWindows()[0].webContents.openDevTools();
+	//win.webContents.openDevTools()
+}
+function openDir() {
+	if(curFileName){
+		shell.showItemInFolder(curFileName);
+	} else {
+		shell.showItemInFolder(defaultPath);
+	}
+    
 }
 
 function license() {
@@ -309,11 +327,13 @@ angular.module('kityminderDemo', ['kityminderEditor']).config(function (configPr
 
 window.$(function () {
     if (minder != null) {// auto saving
+		/*
         minder.on('contentchange', function () {
             if (isSutoSave) {
                 saveDialog();
             }
         });
+		*/
 
         minder.on('selectionchange', function () {
             var node = minder.getSelectedNode();
@@ -362,7 +382,7 @@ var template = [{
         {
             label: '自动保存',
             type: 'checkbox',
-            checked: true,
+            checked: false,
             click: autoSave
         },
         { type: 'separator' },
@@ -409,6 +429,16 @@ var template = [{
 }, {
     label: "窗口(&W)",
     submenu: [
+		{
+            label: 'DEV',
+            accelerator: 'CmdOrCtrl+Shift+i',
+            click: showDev
+        },
+		{
+            label: '文件的目录',
+            accelerator: 'CmdOrCtrl+Shift+o',
+            click: openDir
+        },
         {
             label: '最大化(&X)',
             click: maxwin

@@ -52,6 +52,7 @@ function hasData() {
 
 function initRoot() {
     //defaultPath = null;
+    curFileName = null;
     editor.minder.importJson({ "root": { "data": { "text": "中心主题" } }, "template": "filetree", "theme": "fresh-blue" });
     editor.minder.select(minder.getRoot(), true);
 }
@@ -62,7 +63,9 @@ function autoSave(obj) {
 
 function openDialog() {
     dialog.showOpenDialog(
-        { filters: [{ name: 'KityMinder', extensions: ['km'] }] },
+        { 
+			defaultPath: defaultPath,
+			filters: [{ name: 'KityMinder', extensions: ['km'] }] },
         (fileName) => {
             if (!fileName) { return; }
 
@@ -355,7 +358,7 @@ var template = [{
         {
             label: '新建文件(&N)',
             accelerator: 'CmdOrCtrl+N',
-            click: newDialog
+            click: initRoot
         },
         {
             label: '打开文件(&O)',

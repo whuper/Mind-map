@@ -222,7 +222,13 @@ Function.prototype也是唯一一个typeof XXX.prototype为 function的prototype
 	false
 
 
-	
+##八. Prototype
+
+> 在 ECMAScript 核心所定义的全部属性中，最耐人寻味的就要数 prototype 属性了。  
+> 对于 ECMAScript 中的引用类型而言，prototype 是保存着它们所有实例方法的真正所在。   
+> 换句话所说，诸如 toString()和 valuseOf() 等方法实际上都保存在 prototype 名下，只不过是通过各自对象的实例访问罢了。
+
+####——《JavaScript 高级程序设计》第三版 P116	
 
 
 

@@ -336,7 +336,7 @@ window.$(function () {
                 saveDialog();
             }
         });
-		*/
+		
 
         minder.on('selectionchange', function () {
             var node = minder.getSelectedNode();
@@ -347,6 +347,7 @@ window.$(function () {
                 menu.items[1].submenu.items[5].enabled = !!node;
 
         });
+		*/
     }
 });
 var remote = require('electron').remote;
@@ -467,8 +468,11 @@ var template = [{
     ]
 }];
 
-var menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(menu);
+ if (process.platform !== 'darwin') {
+	var menu = Menu.buildFromTemplate(template);
+	Menu.setApplicationMenu(menu);
+ }
+
 
 // 允许通过拖拽打开文件 
 var body = document.body;

@@ -348,6 +348,28 @@ window.$(function () {
 
         });
 		*/
+        window.addEventListener('keydown',function(e) {
+         if(e && e.metaKey ){   //同时按下Alt+s
+                 console.log('meta')
+                 switch (e.key) {
+                         case 'o':
+                             openDialog();
+                          break;
+                         case 'n':
+                             initRoot();
+                          break;
+                         case 's':
+                                 saveDialog();
+                          break;
+                         case 'e':
+                             exportDialog();
+                          break;
+                         default:
+                                 
+                 }
+
+                }
+                    },true)
     }
 });
 var remote = require('electron').remote;

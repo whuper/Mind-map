@@ -50,3 +50,119 @@
 	alert("null or undefined or NaN"); 
 	}
 提示：一般不那么区分就使用这个足够。
+
+### 手写jsonp
+
+	(function (window,document) {
+	    "use strict";
+	    var jsonp = function (url,data,callback) {
+	
+	        // 1.将传入的data数据转化为url字符串形式
+	        // {id:1,name:'zhangsan'} => id=1&name=zhangsan
+
+	        var dataString = url.indexof('?') == -1? '?': '&';
+	        for(var key in data){
+	            dataString += key + '=' + data[key] + '&';
+	        };
+	
+	        // 2 处理url中的回调函数
+	        // cbFuncName回调函数的名字 ：my_json_cb_名字的前缀 + 随机数（把小数点去掉）
+	        var cbFuncName = 'my_json_cb_' + Math.random().toString().replace('.','');
+	        dataString += 'callback=' + cbFuncName;
+	
+	        // 3.创建一个script标签并插入到页面中
+	        var scriptEle = document.createElement('script');
+	        scriptEle.src = url + dataString;
+	
+	        // 4.挂载回调函数
+	        window[cbFuncName] = function (data) {
+	            callback(data);
+	            // 处理完回调函数的数据之后，删除jsonp的script标签
+	            document.body.removeChild(scriptEle);
+	        }
+	
+	        // 5.append到页面中
+	        document.body.appendChild(scriptEle);
+	    }
+	
+	    // 因为jsonp是一个私有函数外部不能调用，所有jsonp函数作文window对象的一个方法，供外部调用
+	    window.$jsonp = jsonp;
+	
+	})(window,document)
+
+### 手写ajax
+
+#### 创建一个异步调用对象
+
+	function createXMLHTTPRequest() {     
+	                 //1.创建XMLHttpRequest对象     
+	                 //这是XMLHttpReuquest对象无部使用中最复杂的一步     
+	                 //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码  
+   
+	                 var xmlHttpRequest;  
+	                 if (window.XMLHttpRequest) {     
+	                     //针对FireFox，Mozillar，Opera，Safari，IE7，IE8     
+	                    xmlHttpRequest = new XMLHttpRequest();     
+	                     //针对某些特定版本的mozillar浏览器的BUG进行修正     
+	                     if (xmlHttpRequest.overrideMimeType) {     
+	                         xmlHttpRequest.overrideMimeType("text/xml");     
+	                     }     
+	                 } else if (window.ActiveXObject) {     
+	                     //针对IE6，IE5.5，IE5     
+	                     //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中     
+	                     //排在前面的版本较新   
+  
+	                     var activexName = [ "MSXML2.XMLHTTP", "Microsoft.XMLHTTP" ];     
+	                     for ( var i = 0; i < activexName.length; i++) {     
+	                         try {     
+	                             //取出一个控件名进行创建，如果创建成功就终止循环     
+	                             //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建     
+	                            xmlHttpRequest = new ActiveXObject(activexName[i]);   
+	                            if(xmlHttpRequest){  
+	                                break;  
+	                            }  
+	                         } catch (e) {     
+	                         }     
+	                     }     
+	                 }     
+	                 return xmlHttpRequest;  
+	             }
+
+###get代码
+
+	function get(){  
+	    var req = createXMLHTTPRequest();  
+	    if(req){  
+	        req.open("GET", "http://test.com/?keywords=手机", true);  
+	        req.onreadystatechange = function(){  
+	            if(req.readyState == 4){  
+	                if(req.status == 200){  
+	                    alert("success");  
+	                }else{  
+	                    alert("error");  
+	                }  
+	            }  
+	        }  
+	        req.send(null);  
+	    }  
+	}
+
+###POST代码
+
+	function post(){  
+	    var req = createXMLHTTPRequest();  
+	    if(req){  
+	        req.open("POST", "http://test.com/", true);  
+	        req.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=gbk;");     
+	        req.send("keywords=手机");  
+	        req.onreadystatechange = function(){  
+	            if(req.readyState == 4){  
+	                if(req.status == 200){  
+	                    alert("success");  
+	                }else{  
+	                    alert("error");  
+	                }  
+	            }  
+	        }  
+	    }  
+	}

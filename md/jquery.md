@@ -456,6 +456,42 @@ end(); // 筛选选择器会改变jQuery对象的DOM对象，想要恢复到上�
 jQuery除了官方的几个版本之外，特意开通了插件接口，经过许多年的发展，jQuery插件数不胜数。这些插件可以提供很多额外的功能，如jquery.color.js支持颜色的渐变，ui工程师常用的由官方维护的jQueryUI插件，给我们提供了很大的方便。
 
 我们也可以自定义jQuery插件**（jQuery对象扩展方法--$.fn.pluginName = function ( ) { }）**，是学习jQuery的一些特定方法，jQuery的原生代码归根到底还是javascript。
+
+
+jquery定义插件
+扩展jquery的时候。最核心的方法是以下两种：
+
+#### $.extend(object) 可以理解为jquery添加一个静态方法
+#### $.fn.extend(object) 可以理解为jquery实例添加一个方法
+
+
+    $(function() {  
+       $.fn.插件名称 = function(options) {  
+          var defaults = {  
+             Event : "click",        //触发响应事件  
+             msg : "Holle word!"        //显示内容  
+          };  
+          var options = $.extend(defaults,options);  
+          //功能代码部分  
+          //绑定事件  
+          $(this).live(options.Event,function(e){  
+             alert(options.msg);  
+          });  
+       }  
+    });  
+
+调用
+
+    $(function() {  
+       //绑定元素事件  
+       $("#test").插件名称({  
+          Event : "click",        //触发响应事件  
+          msg : "插件原来就是这么简单!"     //显示内容  
+       });  
+    });  
+
+
+
 ##jquery ajax
 
 	$.ajax({ 

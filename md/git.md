@@ -70,3 +70,17 @@ git 如何删除缓存的远程分支列表
 	git add .
 	git commit -m 'update .gitignore'
 
+
+### or create a new repository on the command line
+	echo "# compilations" >> README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git remote add origin https://github.com/whuper/compilations.git
+	git push -u origin master
+
+
+### or push an existing repository from the command line
+	git remote add origin https://github.com/whuper/compilations.git
+	git push -u origin master
+

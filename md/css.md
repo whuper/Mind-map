@@ -45,3 +45,187 @@ rem的出现 使很多 移动端的自适应得到了改变，因为 rem是指�
 		font-size:1.2rem ; /* 12÷10=1.2 */	
 	}
 
+## 垂直居中
+### 文本
+1、父元素高度确定的单行文本  
+         
+	 设置  height = line-height      
+2 父元素高度确定的多行文本 
+给父元素设置
+
+	display:table-cell 
+	vertical-align:middle
+	
+3 针对上面的情况，如果是父元素高度不确定的多行文本 
+
+	给父元素的父元素增加css：display: table;
+
+### 普通元素
+### css2
+
+	#wrapper {
+	    display: table;
+	}
+	
+	#cell {
+	    display: table-cell;
+	    vertical-align: middle;
+	}
+	
+	<div id="wrapper">  
+    	<div id="cell">
+        <div class="content">Content goes here</div>
+    	</div>
+	</div>  
+
+#### Absolute Positioning and Negative Margin
+
+html
+	
+	<div id="parent">
+	    <div id="child">Content here</div>
+	</div>
+
+css
+
+	#parent {position: relative;}
+	#child {
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    height: 30%;
+	    width: 50%;
+	    margin: -15% 0 0 -25%;
+	}
+
+#### Absolute Positioning and Stretching
+
+html
+	
+	<div id="parent">
+	    <div id="child">Content here</div>
+	</div>
+
+css
+
+	#parent {position: relative;}
+	#child {
+	    position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+	    width: 50%;
+	    height: 30%;
+	    margin: auto;
+	}
+
+#### css3
+1.不知道自己高度和父容器高度的情况下, 利用绝对定位只需要以下三行：
+
+	parentElement{
+	        position:relative;
+	    }
+	
+	 childElement{
+	        position: absolute;
+	        top: 50%;
+	        transform: translateY(-50%);
+	
+	 }
+
+2.若父容器下只有一个元素，且父元素设置了高度，则只需要使用相对定位即可
+
+	parentElement{
+	        height:xxx;
+	    }
+	
+	    .childElement {
+	      position: relative;
+	      top: 50%;
+	      transform: translateY(-50%);
+	    }
+
+### Flex 布局：
+	parentElement{
+	    display:flex;/*Flex布局*/
+	    display: -webkit-flex; /* Safari */
+	    align-items:center;/*指定垂直居中*/
+	}
+
+## 水平居中
+
+1、行内元素
+
+	父元素设置  text-align:center
+
+2、定宽块状元素
+
+	左右margin : auto
+
+### Flex 布局：
+	parentElement{
+	    display:flex;/*Flex布局*/
+	    display: -webkit-flex; /* Safari */
+	    justify-content:center;
+	}
+
+
+## 双飞翼布局是如何在圣杯布局的基础上诞生
+
+圣杯布局和双飞翼布局都是为了实现两边子面板宽度一定，中间主面板自适应。两者的差异并非题主所说的去掉相对定位就完全相同。
+
+---
+**圣杯布局的构造过程是：**
+
+	<div id="bd">         
+	    <div class="main"></div>        
+	    <div class="sub"></div>        
+	    <div class="extra"></div>  
+	</div>
+	
+1. 三者都设置向左浮动。
+1. 设置main宽度为100%。
+1. 设置 负边距，sub设置负左边距为100%，extra设置负左边距为负的自身宽度。
+1. 设置bd的padding值给左右两个子面板留出空间。
+1. 设置两个子面板为相对定位，sub的left值为负的sub宽度，extra的right值为负的extra宽度。
+
+但是圣杯布局有个问题，**当面板的main部分比两边的子面板宽度小的时候，布局就会乱掉**。因此也就有了双飞翼布局来克服这个问题。如果不增加任何标签，想实现更完美的布局非常困难，因此双飞翼布局在主面板上选择了添加一个标签。
+
+---
+**双飞翼布局的构造过程是：**
+
+	<div id="main" class="column">
+	      <div id="main-content">#main</div>
+	</div>
+	<div class="sub"></div>        
+	<div class="extra"></div>
+	
+1. 三者都设置向左浮动。
+1. 设置main宽度为100%。
+1. 设置 负边距，sub设置负左边距为100%，extra设置负左边距为负的自身宽度。
+1. 设置main-content的margin值给左右两个子面板留出空间。
+
+对比两者可以发现，双飞翼布局与圣杯布局的主要差别在于：
+
+1. 双飞翼布局给主面板添加了一个父标签用来通过margin给子面板腾出空间。
+1. 圣杯采用的是padding，而双飞翼采用的margin，解决了圣杯布局的问题。
+1. 双飞翼布局不用设置相对布局，以及对应的left和right值。
+
+相比之下，个人认为双飞翼布局更加简洁，响应式更好。
+
+## flex实现
+![](../resources/pictures/flex1.png)
+
+## css3 三角形
+保留底边框的颜色，其他边框的颜色设置为透明
+
+    .triangle6{
+	    width:0px;
+	    height:0px;
+	    border-left:100px solid transparent;
+	    border-bottom: 100px solid red;
+	    border-top:100px solid transparent;
+	    border-right: 100px solid transparent;
+    }
+

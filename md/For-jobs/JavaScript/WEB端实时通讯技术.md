@@ -15,6 +15,8 @@ Ajax无法满足实时通信富交互式应用的实时更新数据的要求，�
 > 短轮询是定时向服务器发送请求，看有没有更新的数据，服务器收到请求后立马返回数据，不管有没有> 更新。 
 >  
 > 而长轮询是页面发起一个请求，然后服务器一直保持连接打开，直到有数据发送。
+
+
 ### HTTP流
 浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据。
 ## 3.SSE
@@ -36,6 +38,7 @@ WebSocket是HTML5开始提供的一种在单个 TCP 连接上进行全双工通�
     var socket = new WebSocket("ws://www.example.com/server.php");
     socket.send("Hello World!");
 4.服务器要读取其中的数据，就是要解析接收到的JSON字符串。
+
 5.服务器向客户端发来消息时，WebSocket会触发message事件。这个message事件会把返回的数据保存在event.data属性中：
 
     socket.onmessage = function(){

@@ -464,3 +464,174 @@ BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述�
 3. js基础，es5和es6的主要特性都要掌握。这部分是大部分公司最看重的部分之一。
 4. 网络基础，计算机网络课程的知识不能丢，http是重点。
 5. 算法基础，不说让你整个红黑树、动态规划什么的，基本的各种排序、栈队列树(函数调用栈、事件队列、DOM 树)的基本实现要了然于胸。
+
+## 何为抽象
+
+程序语言所用抽象的功能：
+
+提取事物的共性，共同的属性，共同的行为。抽象描述了对象（也就是模拟现实的物体）的最基本的特征，抽象提供了一个对象的轮廓，是外部看到的视图。
+
+
+## JS的6种继承方式
+
+### 一 简单原型链
+
+	function Super(){
+	    this.val = 1;
+	    this.arr = [1];
+	}
+	function Sub(){
+	    // ...
+	}
+	Sub.prototype = new Super();    // 核心
+	 
+	var sub1 = new Sub();
+	var sub2 = new Sub();
+	sub1.val = 2;
+	sub1.arr.push(2);
+	alert(sub1.val);    // 2
+	alert(sub2.val);    // 1
+	 
+	alert(sub1.arr);    // 1, 2
+	alert(sub2.arr);    // 1, 2
+	
+#### 核心
+
+拿父类实例来充当子类原型对象
+#### 优缺点
+优点：
+简单，易于实现
+缺点：
+修改sub1.arr后sub2.arr也变了，因为来自原型对象的引用属性是所有实例共享的。
+
+可以这样理解：执行sub1.arr.push(2);先对sub1进行属性查找，找遍了实例属性（在本例中没有实例属性），没找到，就开始顺着原型链向上找，拿到了sub1的原型对象，一搜身，发现有arr属性。于是给arr末尾插入了2，所以sub2.arr也变了
+
+创建子类实例时，无法向父类构造函数传参
+
+### 二 借用构造函数
+
+简单原型链真够简单，可是存在2个致命缺点简直不能用，于是上个世纪末的jsers就想办法fix这2个缺陷，然后出现了借用构造函数方式
+
+
+	function Super(val){
+	    this.val = val;
+	    this.arr = [1];
+	 
+	    this.fun = function(){
+	        // ...
+	    }
+	}
+	function Sub(val){
+	    Super.call(this, val);   // 核心
+	    // ...
+	}
+	 
+	var sub1 = new Sub(1);
+	var sub2 = new Sub(2);
+	sub1.arr.push(2);
+	alert(sub1.val);    // 1
+	alert(sub2.val);    // 2
+	 
+	alert(sub1.arr);    // 1, 2
+	alert(sub2.arr);    // 1
+	 
+	alert(sub1.fun === sub2.fun);   // false
+	
+#### 核心
+
+借父类的构造函数来增强子类实例，等于是把父类的实例属性复制了一份给子类实例装上了（完全没有用到原型）
+#### 优缺点
+优点：
+解决了子类实例共享父类引用属性的问题
+
+创建子类实例时，可以向父类构造函数传参
+
+缺点：
+
+无法实现函数复用，每个子类实例都持有一个新的fun函数，太多了就会影响性能，内存爆炸。。
+P.S.好吧，刚修复了共享引用属性的问题，又出现了这个新问题。。
+
+#### 三 组合继承（最常用）
+目前我们的借用构造函数方式还是有问题（无法实现函数复用），没关系
+
+	function Super(){
+	    // 只在此处声明基本属性和引用属性
+	    this.val = 1;
+	    this.arr = [1];
+	}
+	//  在此处声明函数
+	Super.prototype.fun1 = function(){};
+	Super.prototype.fun2 = function(){};
+	//Super.prototype.fun3...
+	function Sub(){
+	    Super.call(this);   // 核心
+	    // ...
+	}
+	Sub.prototype = new Super();    // 核心
+	 
+	var sub1 = new Sub(1);
+	var sub2 = new Sub(2);
+	alert(sub1.fun === sub2.fun);   // true
+	
+#### 核心
+
+把实例函数都放在原型对象上，以实现函数复用。同时还要保留借用构造函数方式的优点，通过Super.call(this);继承父类的基本属性和引用属性并保留能传参的优点；通过Sub.prototype = new Super();继承父类函数，实现函数复用
+#### 优缺点
+
+优点：
+不存在引用属性共享问题
+可传参
+函数可复用
+
+缺点:
+
+（一点小瑕疵）子类原型上有一份多余的父类实例属性，因为父类构造函数被调用了两次，生成了两份，而子类实例上的那一份屏蔽了子类原型上的。。。又是内存浪费，比刚才情况好点，不过确实是瑕疵
+
+### 四 寄生组合继承（最佳方式）
+
+从名字就能看出又是对组合继承的优化，不是说组合继承有瑕疵吗，没关系，我们接着追求完美
+
+	function beget(obj){   // 生孩子函数 beget：龙beget龙，凤beget凤。
+	    var F = function(){};
+	    F.prototype = obj;
+	    return new F();
+	}
+	function Super(){
+	    // 只在此处声明基本属性和引用属性
+	    this.val = 1;
+	    this.arr = [1];
+	}
+	//  在此处声明函数
+	Super.prototype.fun1 = function(){};
+	Super.prototype.fun2 = function(){};
+	//Super.prototype.fun3...
+	function Sub(){
+	    Super.call(this);   // 核心
+	    // ...
+	}
+	var proto = beget(Super.prototype); // 核心
+	proto.constructor = Sub;            // 核心
+	Sub.prototype = proto;              // 核心
+	 
+	var sub = new Sub();
+	alert(sub.val);
+	alert(sub.arr);
+	
+> P.S.等等，生孩子函数是啥东西，怎么没听过？还有标明了核心的3句话，怎么没看明白？别着急，我们喝杯茶接着看
+
+###核心
+
+> 用beget(Super.prototype);切掉了原型对象上多余的那份父类实例属性
+> P.S.啥？没看明白？哦哦~，**忘记说原型式和寄生式继承了**，就说怎么总觉得忘了锁门。。这记性
+> P.S.寄生组合式继承，这名字不是很贴切，和寄生式继承关系并不是特别大
+
+### 优缺点
+
+优点：完美了
+
+缺点：理论上没有了（如果用起来麻烦不算缺点的话。。）
+P.S.用起来麻烦是一方面，另一方面是因为寄生组合式继承出现的比较晚，是21世纪初的东西，大家等不起这么久，所以组合继承是最常用的，而这个理论上完美的方案却只是课本上的最佳方式了 
+
+### 原型式
+
+### 寄生式

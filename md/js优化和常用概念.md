@@ -474,164 +474,232 @@ BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述�
 
 ## JS的6种继承方式
 
-### 一 简单原型链
-
-	function Super(){
-	    this.val = 1;
-	    this.arr = [1];
-	}
-	function Sub(){
-	    // ...
-	}
-	Sub.prototype = new Super();    // 核心
-	 
-	var sub1 = new Sub();
-	var sub2 = new Sub();
-	sub1.val = 2;
-	sub1.arr.push(2);
-	alert(sub1.val);    // 2
-	alert(sub2.val);    // 1
-	 
-	alert(sub1.arr);    // 1, 2
-	alert(sub2.arr);    // 1, 2
+既然要实现继承，那么首先我们得有一个父类，代码如下：
 	
-#### 核心
+	// 定义一个动物类
+	function Animal (name) {
+	  // 属性
+	  this.name = name || 'Animal';
+	  // 实例方法
+	  this.sleep = function(){
+	    console.log(this.name + '正在睡觉！');
+	  }
+	}
+	// 原型方法
+	Animal.prototype.eat = function(food) {
+	  console.log(this.name + '正在吃：' + food);
+	};
+### 1、原型链继承
+核心： 将父类的实例作为子类的原型
 
-拿父类实例来充当子类原型对象
-#### 优缺点
-优点：
+	function Cat(){ 
+	}
+	Cat.prototype = new Animal();
+	Cat.prototype.name = 'cat';
+	
+	//　Test Code
+	var cat = new Cat();
+	console.log(cat.name);
+	console.log(cat.eat('fish'));
+	console.log(cat.sleep());
+	console.log(cat instanceof Animal); //true 
+	console.log(cat instanceof Cat); //true
+特点：
+
+非常纯粹的继承关系，实例是子类的实例，也是父类的实例
+父类新增原型方法/原型属性，子类都能访问到
 简单，易于实现
-缺点：
-修改sub1.arr后sub2.arr也变了，因为来自原型对象的引用属性是所有实例共享的。
-
-可以这样理解：执行sub1.arr.push(2);先对sub1进行属性查找，找遍了实例属性（在本例中没有实例属性），没找到，就开始顺着原型链向上找，拿到了sub1的原型对象，一搜身，发现有arr属性。于是给arr末尾插入了2，所以sub2.arr也变了
-
-创建子类实例时，无法向父类构造函数传参
-
-### 二 借用构造函数
-
-简单原型链真够简单，可是存在2个致命缺点简直不能用，于是上个世纪末的jsers就想办法fix这2个缺陷，然后出现了借用构造函数方式
-
-
-	function Super(val){
-	    this.val = val;
-	    this.arr = [1];
-	 
-	    this.fun = function(){
-	        // ...
-	    }
-	}
-	function Sub(val){
-	    Super.call(this, val);   // 核心
-	    // ...
-	}
-	 
-	var sub1 = new Sub(1);
-	var sub2 = new Sub(2);
-	sub1.arr.push(2);
-	alert(sub1.val);    // 1
-	alert(sub2.val);    // 2
-	 
-	alert(sub1.arr);    // 1, 2
-	alert(sub2.arr);    // 1
-	 
-	alert(sub1.fun === sub2.fun);   // false
-	
-#### 核心
-
-借父类的构造函数来增强子类实例，等于是把父类的实例属性复制了一份给子类实例装上了（完全没有用到原型）
-#### 优缺点
-优点：
-解决了子类实例共享父类引用属性的问题
-
-创建子类实例时，可以向父类构造函数传参
 
 缺点：
 
-无法实现函数复用，每个子类实例都持有一个新的fun函数，太多了就会影响性能，内存爆炸。。
-P.S.好吧，刚修复了共享引用属性的问题，又出现了这个新问题。。
 
-#### 三 组合继承（最常用）
-目前我们的借用构造函数方式还是有问题（无法实现函数复用），没关系
 
-	function Super(){
-	    // 只在此处声明基本属性和引用属性
-	    this.val = 1;
-	    this.arr = [1];
+
+- 要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中
+- 无法实现多继承
+- 来自原型对象的引用属性是所有实例共享的（详细请看附录代码： 示例1）
+- 创建子类实例时，无法向父类构造函数传参
+- 推荐指数：★★（3、4两大致命缺陷）
+
+2017-8-17 10:21:43补充：感谢 MMHS 指出。
+
+缺点1中描述有误：可以在Cat构造函数中，为Cat实例增加实例属性。
+
+如果要新增原型属性和方法，则必须放在new Animal()这样的语句之后执行。
+
+### 2、构造函数继承
+核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）
+
+	function Cat(name){
+	  Animal.call(this);
+	  this.name = name || 'Tom';
 	}
-	//  在此处声明函数
-	Super.prototype.fun1 = function(){};
-	Super.prototype.fun2 = function(){};
-	//Super.prototype.fun3...
-	function Sub(){
-	    Super.call(this);   // 核心
-	    // ...
-	}
-	Sub.prototype = new Super();    // 核心
-	 
-	var sub1 = new Sub(1);
-	var sub2 = new Sub(2);
-	alert(sub1.fun === sub2.fun);   // true
 	
-#### 核心
+	// Test Code
+	var cat = new Cat();
+	console.log(cat.name);
+	console.log(cat.sleep());
+	console.log(cat instanceof Animal); // false
+	console.log(cat instanceof Cat); // true
+特点：
 
-把实例函数都放在原型对象上，以实现函数复用。同时还要保留借用构造函数方式的优点，通过Super.call(this);继承父类的基本属性和引用属性并保留能传参的优点；通过Sub.prototype = new Super();继承父类函数，实现函数复用
-#### 优缺点
+解决了1中，子类实例共享父类引用属性的问题
+创建子类实例时，可以向父类传递参数
+可以实现多继承（call多个父类对象）
 
-优点：
-不存在引用属性共享问题
-可传参
-函数可复用
+缺点：
 
-缺点:
 
-（一点小瑕疵）子类原型上有一份多余的父类实例属性，因为父类构造函数被调用了两次，生成了两份，而子类实例上的那一份屏蔽了子类原型上的。。。又是内存浪费，比刚才情况好点，不过确实是瑕疵
+- 实例并不是父类的实例，只是子类的实例
+- 只能继承父类的实例属性和方法，不能继承原型属性/方法
+- 无法实现函数复用，每个子类都有父类实例函数的副本，影响性能
+- 推荐指数：★★（缺点3）
 
-### 四 寄生组合继承（最佳方式）
+### 3、实例继承
+核心：为父类实例添加新特性，作为子类实例返回
 
-从名字就能看出又是对组合继承的优化，不是说组合继承有瑕疵吗，没关系，我们接着追求完美
-
-	function beget(obj){   // 生孩子函数 beget：龙beget龙，凤beget凤。
-	    var F = function(){};
-	    F.prototype = obj;
-	    return new F();
+	function Cat(name){
+	  var instance = new Animal();
+	  instance.name = name || 'Tom';
+	  return instance;
 	}
-	function Super(){
-	    // 只在此处声明基本属性和引用属性
-	    this.val = 1;
-	    this.arr = [1];
-	}
-	//  在此处声明函数
-	Super.prototype.fun1 = function(){};
-	Super.prototype.fun2 = function(){};
-	//Super.prototype.fun3...
-	function Sub(){
-	    Super.call(this);   // 核心
-	    // ...
-	}
-	var proto = beget(Super.prototype); // 核心
-	proto.constructor = Sub;            // 核心
-	Sub.prototype = proto;              // 核心
-	 
-	var sub = new Sub();
-	alert(sub.val);
-	alert(sub.arr);
 	
-> P.S.等等，生孩子函数是啥东西，怎么没听过？还有标明了核心的3句话，怎么没看明白？别着急，我们喝杯茶接着看
+	// Test Code
+	var cat = new Cat();
+	console.log(cat.name);
+	console.log(cat.sleep());
+	console.log(cat instanceof Animal); // true
+	console.log(cat instanceof Cat); // false
 
-###核心
+特点：
 
-> 用beget(Super.prototype);切掉了原型对象上多余的那份父类实例属性
-> P.S.啥？没看明白？哦哦~，**忘记说原型式和寄生式继承了**，就说怎么总觉得忘了锁门。。这记性
-> P.S.寄生组合式继承，这名字不是很贴切，和寄生式继承关系并不是特别大
+不限制调用方式，不管是new 子类()还是子类(),返回的对象具有相同的效果
+缺点：
 
-### 优缺点
+实例是父类的实例，不是子类的实例
+不支持多继承
+推荐指数：★★
 
-优点：完美了
+### 4、拷贝继承
 
-缺点：理论上没有了（如果用起来麻烦不算缺点的话。。）
-P.S.用起来麻烦是一方面，另一方面是因为寄生组合式继承出现的比较晚，是21世纪初的东西，大家等不起这么久，所以组合继承是最常用的，而这个理论上完美的方案却只是课本上的最佳方式了 
+	function Cat(name){
+	  var animal = new Animal();
+	  for(var p in animal){
+	    Cat.prototype[p] = animal[p];
+	  }
+	  Cat.prototype.name = name || 'Tom';
+	}
+	
+	// Test Code
+	var cat = new Cat();
+	console.log(cat.name);
+	console.log(cat.sleep());
+	console.log(cat instanceof Animal); // false
+	console.log(cat instanceof Cat); // true
 
-### 原型式
+特点：
 
-### 寄生式
+支持多继承
+缺点：
+
+效率较低，内存占用高（因为要拷贝父类的属性）
+无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）
+推荐指数：★（缺点1）
+
+### 5、组合继承
+核心：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
+	
+	function Cat(name){
+	  Animal.call(this);
+	  this.name = name || 'Tom';
+	}
+	Cat.prototype = new Animal();
+	
+	// 感谢 @学无止境c 的提醒，组合继承也是需要修复构造函数指向的。
+	
+	Cat.prototype.constructor = Cat;
+	
+	// Test Code
+	var cat = new Cat();
+	console.log(cat.name);
+	console.log(cat.sleep());
+	console.log(cat instanceof Animal); // true
+	console.log(cat instanceof Cat); // true
+
+特点：
+
+
+- 弥补了方式2的缺陷，可以继承实例属性/方法，也可以继承原型属性/方法
+- 既是子类的实例，也是父类的实例
+- 不存在引用属性共享问题
+- 可传参
+- 函数可复用
+
+缺点：
+
+调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）
+推荐指数：★★★★（仅仅多消耗了一点内存）
+
+### 6、寄生组合继承
+核心：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点
+
+	function Cat(name){
+	  Animal.call(this);
+	  this.name = name || 'Tom';
+	}
+	(function(){
+	  // 创建一个没有实例方法的类
+	  var Super = function(){};
+	  Super.prototype = Animal.prototype;
+	  //将实例作为子类的原型
+	  Cat.prototype = new Super();
+	})();
+	
+	// Test Code
+	var cat = new Cat();
+	console.log(cat.name);
+	console.log(cat.sleep());
+	console.log(cat instanceof Animal); // true
+	console.log(cat instanceof Cat); //true
+	
+	//感谢 @bluedrink 提醒，该实现没有修复constructor。
+	
+	Cat.prototype.constructor = Cat; // 需要修复下构造函数
+
+特点：
+
+堪称完美
+缺点：
+
+实现较为复杂
+推荐指数：★★★★（实现复杂，扣掉一颗星）
+
+## call和apply的作用和区别
+	obj.call(thisObj, arg1, arg2, ...);
+	obj.apply(thisObj, [arg1, arg2, ...]);
+两者作用一致，都是把obj(即this)绑定到thisObj，这时候thisObj具备了obj的属性和方法。
+
+或者说thisObj『继承』了obj的属性和方法。唯一区别是apply接受的是数组参数，call接受的是连续参数。
+
+	add(5,3); //8
+	add.call(sub, 5, 3); //8
+
+通过call和apply，我们可以实现对象继承。
+示例：
+
+	var Parent = function(){
+	    this.name = "yjc";
+	    this.age = 22;
+	}
+	
+	var child = {};
+	
+	console.log(child);//Object {} ,空对象
+	
+	Parent.call(child);
+	
+	console.log(child); //Object {name: "yjc", age: 22}
+
+以上实现了对象的继承。
+
+

@@ -703,3 +703,168 @@ BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述�
 以上实现了对象的继承。
 
 
+## 理解事件、事件处理函数、钩子函数、回调函数
+
+*  js派函数监听事件	=>监听函数就是所谓的钩子函数=>函数钩取事件：函数主动找事件=>钩子函数* 
+*  js预留函数给dom事件，dom事件调用js预留的函数 =>事件派发给函数：事件调用函数=>回调函数
+
+
+dom通过事件通知js的过程即是回调，对应的函数就是回调函数
+
+js通过监听函数得知事件的过程即是钩取，对应的函数就是钩子函数
+
+钩子函数和回调函数都是事件处理函数
+
+## commonjs规范
+1、CommonJs规范的出发点：JS没有模块系统、标准库较少、缺乏包管理工具；为了让JS可以在任何地方运行，以达到Java、C#、PHP这些后台语言具备开发大型应用的能力； 
+
+2、在CommonJs规范中：
+
+* 一个文件就是一个模块，拥有单独的作用域； 
+* 普通方式定义的变量、函数、对象都属于该模块内；* 
+* 通过require来加载模块；* 
+* 通过exports和modul.exports来暴露模块中的内容； 
+
+3、所有代码都运行在模块作用域，不会污染全局作用域；模块可以多次加载，但只会在第一次加载的时候运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果；模块的加载顺序，按照代码的出现顺序是同步加载的; 
+
+4、\_\_dirname代表当前模块文件所在的文件夹路径，__filename代表当前模块文件所在的文件夹路径+文件名; 
+
+5、require（同步加载）基本功能：读取并执行一个JS文件，然后返回该模块的exports对象，如果没有发现指定模块会报错;
+ 
+
+6、模块内的exports：为了方便，node为每个模块提供一个exports变量，其指向module.exports，相当于在模块头部加了这句话：var exports = module.exports，在对外输出时，可以给exports对象添加方法，**PS：不能直接赋值（因为这样就切断了exports和module.exports的联系**）;
+
+## AMD规范
+
+> CommonJs对服务器端不是一个问题，因为所有的模块都存放在本地硬盘，可以同步加载完成，等待时间就是硬盘的读取时间。但是，对于浏览器，这却是一个大问题，因为模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于"假死"状态。
+> 
+> 因此，浏览器端的模块，不能采用"同步加载"（synchronous），只能采用"异步加载"（asynchronous）。这就是AMD规范诞生的背景。
+
+
+AMD是"Asynchronous Module Definition"的缩写，意思就是"异步模块定义"。它采用异步方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等到加载完成之后，这个回调函数才会运行。
+AMD也采用require()语句加载模块，但是不同于CommonJS，它要求两个参数：
+
+	require([module], callback);
+
+第一个参数[module]，是一个数组，里面的成员就是要加载的模块；第二个参数callback，则是加载成功之后的回调函数。如果将前面的代码改写成AMD形式，就是下面这样：
+
+	　　require(['math'], function (math) {
+	　　　　math.add(2, 3);
+	　　});
+
+### requejs使用
+
+1 加载
+
+	　　<script src="js/require.js" data-main="js/main"></script>
+2 主模块的写法
+
+	　　// main.js
+	
+	　　require(['moduleA', 'moduleB', 'moduleC'], function (moduleA, moduleB, moduleC){
+	
+	　　　　// some code here
+	
+	　　});
+
+3 模块的加载
+
+使用require.config()方法，我们可以对模块的加载行为进行自定义。require.config()就写在主模块（main.js）的头部。参数就是一个对象，这个对象的paths属性指定各个模块的加载路径。
+
+	　　require.config({
+	
+	　　　　paths: {
+	
+	　　　　　　"jquery": "lib/jquery.min",
+	　　　　　　"underscore": "lib/underscore.min",
+	　　　　　　"backbone": "lib/backbone.min"
+	
+	　　　　}
+	
+	　　});
+
+5 AMD模块的写法
+
+require.js加载的模块，采用AMD规范。也就是说，模块必须按照AMD的规定来写。
+
+具体来说，就是模块必须采用特定的define()函数来定义。如果一个模块不依赖其他模块，那么可以直接定义在define()函数之中。
+
+假定现在有一个math.js文件，它定义了一个math模块。那么，math.js就要这样写：
+
+	　　// math.js
+	
+	　　define(function (){
+	
+	　　　　var add = function (x,y){
+	
+	　　　　　　return x+y;
+	
+	　　　　};
+	
+	　　　　return {
+	
+	　　　　　　add: add
+	　　　　};
+	
+	　　});
+加载方法如下：
+
+	　　// main.js
+	
+	　　require(['math'], function (math){
+	
+	　　　　alert(math.add(1,1));
+	
+	　　});
+
+如果这个模块还依赖其他模块，那么define()函数的第一个参数，必须是一个数组，指明该模块的依赖性。
+
+
+	　　define(['myLib'], function(myLib){
+	
+	　　　　function foo(){
+	
+	　　　　　　myLib.doSomething();
+	
+	　　　　}
+	
+	　　　　return {
+	
+	　　　　　　foo : foo
+	
+	　　　　};
+	
+	　　});
+加载非规范的模块
+
+> require.config()接受一个配置对象，这个对象除了有前面说过的paths属性之外，还有一个shim属性，专门用来配置不兼容的模块。具体来说，每个模块要定义（1）exports值（输出的变量名），表明这个模块外部调用时的名称；（2）deps数组，表明该模块的依赖性
+
+比如，jQuery的插件可以这样定义：
+
+	　　shim: {
+	
+	　　　　'jquery.scroll': {
+	
+	　　　　　　deps: ['jquery'],
+	
+	　　　　　　exports: 'jQuery.fn.scroll'
+	
+	　　　　}
+	
+	　　}
+## requireJS的基本原理
+
+requireJS是使用创建script元素，通过指定script元素的src属性来实现加载模块的。但这里有几个基本问题需要解决：
+
+1、模块依赖加载之后，如何调用回调函数
+
+> 使用script来加载这些模块依赖，并且监听load事件，且每个script元素都会有一个自定义的属性，用来指明模块名
+
+2、加载依赖之后，如何将接口暴露给回调函数
+
+3、如何解决循环依赖的问题
+
+> 在模块加载依赖的时候，先检查模块依赖中是否存在正在注册的模块，如果存在的话，则先将模块依赖数量减一。通过这种方法用来解决循环依赖的问题。
+
+4、如何解决重复加载的问题
+> 将已定义的模块保存在一个对象中，当加载模块依赖的时候，如果在这个对象中存在的话，则直接返回这个模块。否则的话，则再走一遍加载的模块的流程。

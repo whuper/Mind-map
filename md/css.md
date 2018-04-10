@@ -229,3 +229,24 @@ css
 	    border-right: 100px solid transparent;
     }
 
+## less
+
+Node.js 环境中使用 Less ：
+
+npm install -g less
+> lessc styles.less styles.css 
+
+在浏览器环境中使用 Less ：
+
+	<link rel="stylesheet/less" type="text/css" href="styles.less" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js" ></script>
+	
+[https://less.bootcss.com](https://less.bootcss.com)
+
+* 变量（Variables）
+* 混入（Mixins）
+* 嵌套（Nesting）
+* 运算（Operations）
+* 作用域（Scope）
+* 注释（Comments）
+* 导入（Importing）

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>2018秋</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\Administrator\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.4\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <p><a href="https://zhuanlan.zhihu.com/p/29469769">https://zhuanlan.zhihu.com/p/29469769</a></p>
+<h1 class="mume-header" id="bd3-1">bd（3 1）</h1>
+
+<p>1 cookie和session, cookie和webStorage的区别，如果cookie被篡改怎么办</p>
+<pre class="language-text">参考 html5 api
+
+取 出userId, time， token三 者对应的cookie， 判断前两者通过相同的md5加 密后和token是 否相等，如果相等证明验证通过，如果不等，验证不通过
+</pre>
+<p>2 跨域的方法</p>
+<pre class="language-text">	1 jsonp
+	2 CORS(Cross-Origin Resource Sharing, 跨源资源共享)
+	3 HTML5中新引进的window.postMessage
+</pre>
+<p>3 因为引用计数产生的内存泄漏，在ES6中的解决办法是什么</p>
+<p>4 js中基本类型在内存中存储方式是什么，引用类型的存储方式是什么</p>
+<ul>
+<li>基本类型值在内存中占据固定大小的空间，因此被保存在栈内存中。引用类型的值是对象，保存在堆内存中。</li>
+</ul>
+<p>5 手写jsonp以及常见的响应码，特别问了401</p>
+<p>参考 <strong>js优化和常用概念</strong></p>
+<p>6 渐进增强和优雅降级</p>
+<p><strong>7 封装的js插件，事件委托和性能优化</strong></p>
+<p>8 http连接性能优化，长连接，keep-alive</p>
+<p>9 从输入url到看到页面发生了什么</p>
+<p>参考 <strong>http-browser</strong></p>
+<p>10 前端缓存机制，如果去掉etags\last-modefied\cache-control这些控制缓存的字段，浏览器会怎么处理缓存</p>
+<blockquote>
+<p>header中有一个参数叫Last-Modified ，这个是由服务器自动加上的，如果有这个参数，那么浏览器每次都会重新计算本地的cache。如果浏览器返回一个304的编码就表示资源没有改变，那么浏览器就可以使用本地的cache。</p>
+</blockquote>
+<blockquote>
+<p>就如参考文档中说的，对于IE来说，如果没有设置expirse header的时候，IE的缓存时间就是一个session的时间，如果用户打开一个新的IE窗口的时候，他们就会获取最新的静态资源。但是对于 firefox来说它就不是这样了，它是依赖last—modified的时间的（HTTP 1.1 spec RFC2616）。</p>
+</blockquote>
+<p>11 说一下前端性能优化的各种情况，然后讲清楚每一个类别的细节</p>
+<p>12 给定两个整数a和b，要求在使用任何辅助空间的情况下，交换两个的值</p>
+<p>13 给两个杯子，一个5升，一个6升，水随便用，最后取出3升水</p>
+<p>14 给10个箱子，有一个比其他得要轻，用最少的比较次数找出这个箱子</p>
+<p>15 React组件声明周期，要传送数据在哪个周期发生，应该怎么实现</p>
+<p>16 设计一个产品，实现非前端人员或者运维人员可以方便使用，达到不需要专业前端开发人员就可以实现前端交互实现的功能，详细介绍产品设计的思路、技术选型、用户体验考虑、前端底层支撑实现、项目架构设计和后台架构设计。</p>
+<p>17 给你一个团队，怎么去带，怎么分配任务和把控项目进度</p>
+<p>18 论文算法细节、创新点。 项目中的架构和技术细节。</p>
+<p>19 let暂时性死区和块级作用域</p>
+<p>暂时性死区：</p>
+<blockquote>
+<p>只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。</p>
+</blockquote>
+<blockquote>
+<p>ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。</p>
+</blockquote>
+<blockquote>
+<p>总之，在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称TDZ）。</p>
+</blockquote>
+<blockquote>
+<p>块作用域由 { } 包括，if语句和for语句里面的{ }也属于块作用域</p>
+</blockquote>
+<p>20 React的组件生命周期</p>
+<p>24.实现深拷贝的方法</p>
+<p>参考 <strong>前端</strong></p>
+<p><strong>25.前端安全（XSS、CSRF以及应对措施）</strong></p>
+<p>XSS:跨站脚本攻击(Cross Site Scripting)<br>
+利用了系统对用户的信任</p>
+<p>参考 <strong>前端</strong></p>
+<p>XSS漏洞修复</p>
+<p><strong>用户将数据提交上来的时候进行HTML编码，将相应的符号转换为实体名称再进行下一步的处理</strong></p>
+<p>【不要相信用户提交的数据，过滤过滤过滤！】</p>
+<pre class="language-text">1、将重要的cookie标记为http only, 这样的话Javascript 中的document.cookie语句就不能获取到cookie了.
+
+2、表单数据规定值的类型，例如：年龄应为只能为int、name只能为字母数字组合。
+
+4、对数据进行Html Encode 处理
+
+5、过滤或移除特殊的Html标签， 例如: <script>, <iframe> , &lt; for <, &gt;="" for="">, &quot for
+
+6、过滤JavaScript 事件的标签。例如 "onclick=", "onfocus" 等等。
+</,></iframe></script></pre>
+<p>CSRF的全名为Cross-site request forgery 跨站请求伪造<br>
+利用了系统对页面浏览器的信任</p>
+<p>下面为CSRF攻击原理图：<br>
+<img src="..\assets\CSRF.jpg" alt="CSRF"></p>
+<h3 class="mume-header" id="csrf%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95">CSRF防御方法</h3>
+
+<p>服务器端防御：</p>
+<p>1、重要数据交互采用POST进行接收，当然是用POST也不是万能的，伪造一个form表单即可破解</p>
+<p>2、使用验证码，只要是涉及到数据交互就先进行验证码验证，这个方法可以完全解决CSRF。但是出于用户体验考虑，网站不能给所有的操作都加上验证码。因此验证码只能作为一种辅助手段，不能作为主要解决方案。</p>
+<p>3、验证HTTP Referer字段，该字段记录了此次HTTP请求的来源地址，最常见的应用是图片防盗链。PHP中可以采用APache URL重写规则进行防御，可参考：<a href="http://www.cnblogs.com/phpstudy2015-6/p/6715892.html">http://www.cnblogs.com/phpstudy2015-6/p/6715892.html</a></p>
+<p>4、为每个表单添加令牌token并验证</p>
+<p>（可以使用cookie或者session进行构造。当然这个token仅仅只是针对CSRF攻击，在这前提需要解决好XSS攻击，否则这里也将会是白忙一场【XSS可以偷取客户端的cookie】）</p>
+<p>CSRF攻击之所以能够成功，是因为攻击者可以伪造用户的请求，该请求中所有的用户验证信息都存在于Cookie中，因此攻击者可以在不知道这些验证信息的情况下直接利用用户自己的Cookie来通过安全验证。由此可知，抵御CSRF攻击的关键在于：在请求中放入攻击者所不能伪造的信息，并且该信息不存在于Cookie之中。</p>
+<p>鉴于此，我们将为每一个表单生成一个随机数秘钥，并在服务器端建立一个拦截器来验证这个token，如果请求中没有token或者token内容不正确，则认为可能是CSRF攻击而拒绝该请求。</p>
+<p>由于这个token是随机不可预测的并且是隐藏看不见的，因此恶意攻击者就不能够伪造这个表单进行CSRF攻击了。</p>
+<p>要求：</p>
+<p>1、要确保同一页面中每个表单都含有自己唯一的令牌</p>
+<p>2、验证后需要删除相应的随机数</p>
+<hr>
+<p>26.类数组有哪些</p>
+<p>27.for in的缺点</p>
+<p>28.forEach()</p>
+<p>29.ES6中map遍历的实现原理</p>
+<p>30.数组去重问题</p>
+<p>31.React的思想和原理，虚拟DOM树和diff算法</p>
+<h1 class="mume-header" id="mt3-1">mt（3 1）</h1>
+
+<p>5 https的详细过程，使用的加密算法，是对称加密算法还是非对称加密算法。md5、SHA、AES分别是对称加密的还是非对称加密的</p>
+<p>7 模块化, webpack, AMD和CMD</p>
+<p>AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。</p>
+<p>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。</p>
+<p>类似的还有 CommonJS Modules/2.0 规范，是 BravoJS 在推广过程中对模块定义的规范化产出。</p>
+<p>对于依赖的模块，AMD 是提前执行，CMD 是延迟执行</p>
+<p><strong>9 盒子模型中的margin折叠问题</strong></p>
+<p>触发BFC</p>
+<p>10 两列等高布局，左右两列中间有个margin=20px，左侧定宽怎么实现，如果左侧不定宽怎么实现</p>
+<p>11 二维数组中，找出最大的m个数。（每一行都是非递减序列）</p>
+<p>12 作用域， 原型链，闭包。手写一个闭包，并分析作用域。什么情况下，闭包会导致内存泄漏，手写给个例子。</p>
+<p>13 Symbol，写一个应用实例，并说出它的其他应用场景</p>
+<p>14 BFC的定义和特性</p>
+<p>15 手写实现斐波那契序列</p>
+<p>16 webpack中babel的实现</p>
+<p>Babel的编译过程跟绝大多数其他语言的编译器大致同理，分为三个阶段：</p>
+<blockquote>
+<p>解析：将代码字符串解析成抽象语法树</p>
+<p>变换：对抽象语法树进行变换操作</p>
+<p>再建：根据变换后的抽象语法树再生成代码字符串</p>
+</blockquote>
+<p>17 jQuery源码看过没有，说一说自己有哪些了解</p>
+<p>18 node.js 用过没有</p>
+<p>19 ajax存不存在跨域的问题，解决跨域的问题有哪些</p>
+<p><strong>存在</strong></p>
+<blockquote>
+<p>在工作中，大家应该都遇到过ajax跨域问题，浏览器的错误如下：</p>
+<p>XMLHttpRequest cannot load <a href="http://xn--No-gm8ckc950j8nu">http://目标地址No</a> 'Access-Control-Allow-Origin' header is present on the requested resource. Origin '<a href="http://xn--ldry2jnbz92cg86eemb">http://当前页面地址</a>' is therefore not allowed access.</p>
+<p>为什么会出现跨域问题</p>
+<p>跨域，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript施加的安全限制。</p>
+</blockquote>
+<p>20 数组的各种方法</p>
+<p>21 CSS3 中position的新取值</p>
+<p>22 浮动和定位</p>
+<p>23 内存换页算法知道哪些，说一下详细的算法思想和细节</p>
+<p>24 手写实现 LRU 换页算法</p>
+<p>25 9个球，有一个不正常，但不知道是轻了，还是重了。怎么比对，在3次内找出这个球。</p>
+<p>26 a和b两个数，不借助任何辅助空间，交换值。</p>
+<p>27 js封装插件的问题</p>
+<p>28 事件循环知道吗？描述一下它的实现原理和应用场景。</p>
+<p>29 ajax调用中，后台数据返回线程和前端UI线程是怎样通信和交互的，说一下实现原理。如果让你来设计，你会怎么设计，给出关键的数据结构和流程思路。</p>
+<h1 class="mume-header" id="3602-1">360（2 1）</h1>
+
+<p>1 手写封装一个jsonp</p>
+<p>2 get和post请求（FF浏览器的特例）</p>
+<p>3 垂直居中</p>
+<p>4 HTML5、ES6新特性</p>
+<p>5 动画</p>
+<p>6 事件委托（e.target, e.currentTarget, e.srcElement）</p>
+<p>7 冒泡和捕获</p>
+<p>8 阻止冒泡的方法，阻止默认事件的方法(兼容IE)</p>
+<p>9 redex缓存</p>
+<p>10 封装的插件中datepicker的实现原理</p>
+<p>11 性能优化中离线操作</p>
+<p>12 跨域的其他方法</p>
+<p>13 delegate（事件委托和异步编程）</p>
+<p>14 fiddler 抓包</p>
+<p>15 数组去重</p>
+<p>16 psd切图</p>
+<p>17 正则表达式</p>
+<p>18 socket+openvpn</p>
+<p>19 http包的格式和解析</p>
+<h1 class="mume-header" id="%E5%95%86%E6%B1%A4%E7%A7%91%E6%8A%803-1">商汤科技（3 1）</h1>
+
+<p>1 常用的状态响应码</p>
+<p>2 手写快排</p>
+<p>3 手写实现求两个集合A, B 的差集，<A-B>和<B-A>都要给出</B-A></A-B></p>
+<p>4 说一下react和vue的应用场景</p>
+<p>5 vue-router</p>
+<p>6 CDN路由回溯定向</p>
+<p>7 webpack主要解决了什么问题，有哪些优点</p>
+<p>8 TCP和 UDP</p>
+<p>9 soket阻塞模式</p>
+<p>10 防火墙output链</p>
+<p>11 作用域和原型链，出了一个作用域题，说出输出</p>
+<p>12 new发生了什么和this对象的指向类别</p>
+<p>13 bind、apply和call</p>
+<p>14 原型链题，在一个构造函数的原型上添加方法，问新构造的对象里有没有这个方法</p>
+<p>15 docType是干什么的，都有哪几种取值</p>
+<p>16 浏览器缓存机制，流程和细节</p>
+<p>17 cookie和sessionStorage、localStorage的区别</p>
+<p>19 正常情况下，如果浏览器已经登录了百度账号，再另外打开一个tab页是会自动保持登录状态的，问怎样杜绝这个事情，使得每一次打开都是重新登录，给出实现方案。</p>
+<p><strong>20 http1.0 和 http2.0 的区别</strong></p>
+<p>1.1可以将连接keep alive，一个页面有多个文件不用每次都发起新的连接<br>
+断点续传也是 1.1 才支持的</p>
+<p>HTTP1.1 HTTP 2.0主要区别</p>
+<p>多路复用</p>
+<p>HTTP2.0使用了(类似epoll)多路复用的技术，做到同一个连接并发处理多个请求，而且并发请求的数量比HTTP1.1大了好几个数量级。</p>
+<p>数据压缩</p>
+<p>HTTP1.1不支持header数据的压缩，HTTP2.0使用HPACK算法对header的数据进行压缩，这样数据体积小了，在网络上传输就会更快。</p>
+<p><strong>21 https 的详细过程，从握手到SSL协议，并说出为什么https并没有得到大规模应用</strong></p>
+<p>HTTP是一个应用层协议，由请求和响应构成，是一个标准的客户端服务器模型。</p>
+<p>HTTP是一个无状态的协议。</p>
+<p>在Internet中所有的传输都是通过TCP/IP进行的。HTTP协议作为TCP/IP模型中应用层的协议也不例外。HTTP协议通常承载于TCP协议之上，有时也承载于TLS或SSL协议层之上，这个时候，就成了我们常说的<strong>HTTPS</strong></p>
+<p>HTTPS可以理解为HTTP+SSL/TLS， 即 HTTP 下加入 SSL 层，HTTPS 的安全基础是 SSL，因此加密的详细内容就需要 SSL，用于安全的 HTTP 数据传输。</p>
+<p>SSL（Secure Socket Layer，安全套接字层）</p>
+<p>TLS（Transport Layer Security，传输层安全）</p>
+<p>22 gzip压缩和雪碧图</p>
+<p>23 IE盒子和W3C盒子，两种盒子下，margin取百分比，是相对谁取值的</p>
+<p>父元素</p>
+<p>24 浏览器兼容问题</p>
+<p>25 捕获和冒泡</p>
+<p>26 http 三次握手，和https握手</p>
+<p>27 事件循环，就是定时器的使用。并且出了一个题。问输出什么</p>
+<pre class="language-text">var now = new Date();
+
+var timer = setTimeout(function(){
+
+console.log(new Date()-now);
+
+}, 300);
+
+while((new Date()-now)</pre>
+<p>28 给出上题中，堆栈的执行过程分析</p>
+<p>29 说一下Mvvm和Flux两种框架</p>
+<p>30 手写一个工厂类方法，并在它的基础上给出装饰者模式</p>
+<p>31 实现在一个方法A的调用之前都会先调用方法B, 不允许更改接口和调用方式（钩子和职责链）</p>
+<p>32 手写一个观察者模式，然后再说一下怎么实现发布订阅模式（不能依赖任何第三方框架或已有的实现）</p>
+<p>33 实现一个双向数据绑定，就像angular、react或者vue这种mvvm框架中的双向绑定一样</p>
+<p>34 inline 和inline-block的区别</p>
+<p>1、display：block将元素显示为块级元素，从而可以更好地操控元素的宽高，以及内外边距，每一个块级元素都是从新的一行开始。</p>
+<p>2、display : inline将元素显示为行内元素，高度，行高以及底边距不可改变，高度就是内容文字或者图片的宽度，不可以改变。多个相邻的行内元素排在同一行里，知道页面一行排列不下，才会换新的一行。</p>
+<pre class="language-text"><img src="">、<input>、<textarea>、<select>、<object>都是替换元素
+</object></select></textarea></pre>
+<p>3、display：inline-block看上去值名inline-block是一个混合产物，实际上确是如此，将元素显示为行内块状元素，设置该属性后，其他的行内块级元素会排列在同一行。比如我们li元素一个inline-block，使其既有block的宽度高度特性，又有inline的同行特性，在同一行内有不同高度内容的元素时，通常要设置对齐方式如vertical-align: top;来使元素顶部对齐。</p>
+<p>35 对glup和grant有了解吗，简要说一下</p>
+<p><strong>36 怎样设计实现bootstrap中的栅格系统</strong></p>
+<p>37 操作dom的方法，主要问了取dom对象的方法</p>
+<p>38 聊项目</p>
+<h1 class="mume-header" id="jd2-1">jd（2 1）</h1>
+
+<p>1 手写实现CSS两列等高布局，尽量给出多种方法</p>
+<ol start="2">
+<li>
+<p>Z-index，出了一个题，BFC</p>
+<pre class="language-text"> //假定三个div已经使用了position:relative，问三个div的层叠关系是怎样的，为什么
+ 
+ <div id="A" style="z-index: 2;"> <div id="B" style="z-index: 5;"></div> </div> <div id="C" style="z-index: 3;"></div>
+</pre>
+</li>
+</ol>
+<p>3 块级元素、行内元素、行内块级元素都有哪些？使用场景都是什么？为什么要用到行内块级元素</p>
+<p>4 JS的数据类型，ES6里的Symbol</p>
+<p>5 Ajax的实现原理, 手写封装一个ajax实现</p>
+<p>6 jsonp的可以使用POST方法吗？如果要传递的参数超过了get的最大长度，要怎么办？还有其他哪些跨域方法？</p>
+<p>7 http三次握手，为什么要这样设计？如果改成两次握手会产生什么问题？</p>
+<p>8 http四次挥手</p>
+<p>9 EL表达式，jsp模板</p>
+<p>10 ant-Template前端模板</p>
+<p>11 .css预处理器，Less和Sass</p>
+<p>12 .聊项目</p>
+<p>13 .安全策略，DMZ和vlan划分</p>
+<p>14 .神经网络算法</p>
+<p>15 .二面聊项目，聊架构和细节****</p>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#bd3-1">bd（3 1）</a><br>
+* <a href="#csrf%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95">CSRF防御方法</a></li>
+<li><a href="#mt3-1">mt（3 1）</a></li>
+<li><a href="#3602-1">360（2 1）</a></li>
+<li><a href="#%E5%95%86%E6%B1%A4%E7%A7%91%E6%8A%803-1">商汤科技（3 1）</a></li>
+<li><a href="#jd2-1">jd（2 1）</a></li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    </body>
+    
+    
+    
+    
+    
+    
+    <script>
+(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName('task-list-item-checkbox')
+  for (var i = 0; i < taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== 'LI') li = li.parentElement
+    if (li.tagName === 'LI') {
+      li.classList.add('task-list-item')
+    }
+  }
+}())    
+</script>
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  </html>

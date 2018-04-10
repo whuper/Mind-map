@@ -316,3 +316,21 @@ Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，�
 前进回退				有效							有效
 F5刷新				无效							有效
 Ctrl+F5强制刷新		无效							无效
+
+### 判断当前浏览器类型
+
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isEdge = userAgent.indexOf("Edge") > -1; //判断是否IE的Edge浏览器
+    var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+    var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+    var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
+
+### 判断是否是IE浏览器
+    function isIE()
+    {
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+ 
+    }

@@ -10,3 +10,9 @@
 - https://github.com/keepfool/vue-tutorials
 - https://github.com/Awheat/vue2-douban-market
 
+
+## vuex
+
+mapgetter
+mapstate
+mapaction

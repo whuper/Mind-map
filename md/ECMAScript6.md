@@ -504,6 +504,52 @@ OK。说说迭代器。当你调用一个generator时，它将返回一个迭代
 
 
 
+### 函数调用中使用展开运算符
+在以前我们会使用apply方法来将一个数组展开成多个参数：
+
+	function test(a, b, c) { }
+	var args = [0, 1, 2];
+	test.apply(null, args);
+如上，我们把args数组当作实参传递给了a,b,c，这边正是利用了Function.prototype.apply的特性。
+
+### 不过有了ES6，我们就可以更加简洁地来传递数组参数：
+
+	function test(a,b,c) { }
+	var args = [0,1,2];
+	test(...args);
+我们使用...展开运算符就可以把args直接传递给test()函数。
+
+### 数组字面量中使用展开运算符
+''
+在ES6的世界中，我们可以直接加一个数组直接合并到另外一个数组当中：
+
+	var arr1=['a','b','c'];
+	var arr2=[...arr1,'d','e']; //['a','b','c','d','e']
+### 展开运算符也可以用在push函数中，可以不用再用apply()函数来合并两个数组：
+
+	var arr1=['a','b','c'];
+	var arr2=['d','e'];
+	arr1.push(...arr2); //['a','b','c','d','e']
+### 用于解构赋值
+解构赋值也是ES6中的一个特性，而这个展开运算符可以用于部分情景：
+
+	let [arg1,arg2,...arg3] = [1, 2, 3, 4];
+	arg1 //1
+	arg2 //2
+	arg3 //['3','4']
+展开运算符在解构赋值中的作用跟之前的作用看上去是相反的，将多个数组项组合成了一个新数组。
+
+不过要注意，解构赋值中展开运算符只能用在最后：
+
+	let [arg1,...arg2,arg3] = [1, 2, 3, 4]; //报错
+类数组对象变成数组
+展开运算符可以将一个类数组对象变成一个真正的数组对象：
+
+	var list=document.getElementsByTagName('div');
+	var arr=[..list];
+list是类数组对象，而我们通过使用展开运算符使之变成了数组。
+
+
 ---
 	The woods are lovely,dark and deep.
 	But I have promises to keep.

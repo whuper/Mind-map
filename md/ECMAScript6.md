@@ -269,7 +269,7 @@ ES6中另外一个好玩的特性就是Spread Operator 也是三个点儿...接�
     const alp = { fist: 'a', second: 'b'}
     const alphabets = { ...alp, third: 'c' }
     console.log(alphabets) //{ "fist": "a", "second": "b", "third": "c"
-}
+	}
 有时候我们想获取数组或者对象除了前几项或者除了某几项的其他项
 
     //数组
@@ -285,7 +285,7 @@ ES6中另外一个好玩的特性就是Spread Operator 也是三个点儿...接�
     }
     const { username, ...rest } = user
     console.log(rest) //{"address": "peking", "age": 19, "gender": "female"
-}
+	}
 对于 Object 而言，还可以用于组合成新的 Object 。(ES2017 stage-2 proposal) 当然如果有重复的属性名，右边覆盖左边
 
     const first = {
@@ -493,6 +493,7 @@ OK。说说迭代器。当你调用一个generator时，它将返回一个迭代
 	export default sex（sex不能加大括号）
 	//原本直接export sex外部是无法识别的，加上default就可以了.但是一个文件内最多只能有一个export default。
 	其实此处相当于为sex变量值"boy"起了一个系统默认的变量名default，自然default只能有一个值，所以一个文件内不能有多个export default。
+
 ---
 	// b.js
 	本质上，a.js文件的export default输出一个叫做default的变量，然后系统允许你为它取任意名字。所以可以为import的模块起任何变量名，且不需要用大括号包含
@@ -504,7 +505,7 @@ OK。说说迭代器。当你调用一个generator时，它将返回一个迭代
 
 
 
-### 函数调用中使用展开运算符
+## 函数调用中使用展开运算符
 在以前我们会使用apply方法来将一个数组展开成多个参数：
 
 	function test(a, b, c) { }

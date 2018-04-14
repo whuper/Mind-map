@@ -62,7 +62,7 @@ Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数�
 	  // 选项
 	})
 
-除了数据属性，Vue 实例还暴露了一些有用的实例属性与方法。它们都有前缀 $，以便与用户定义的属性区分开来。例如：
+除了数据属性，Vue 实例还暴露了一些有用的实例属性与方法。它们都有前缀 \$，以便与用户定义的属性区分开来。例如：
 	
 	var data = { a: 1 }
 	var vm = new Vue({
@@ -70,11 +70,11 @@ Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数�
 	  data: data
 	})
 	
-	vm.$data === data // => true
-	vm.$el === document.getElementById('example') // => true
+	vm.\$data === data // => true
+	vm.\$el === document.getElementById('example') // => true
 	
-	// $watch 是一个实例方法
-	vm.$watch('a', function (newValue, oldValue) {
+	// \$watch 是一个实例方法
+	vm.\$watch('a', function (newValue, oldValue) {
 	  // 这个回调将在 `vm.a` 改变后调用
 	})
 
@@ -272,7 +272,7 @@ Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数�
 
 	<div class="active text-danger"></div>
 
-#### 数组语法
+#### 数组语法 style
 v-bind:style 的数组语法，可以在同一个元素上，使用多个 style 对象：
 
 	<div v-bind:style="[baseStyles, overridingStyles]"></div>
@@ -300,7 +300,8 @@ v-if 是惰性的(lazy)：如果在初始渲染时条件为 false，它不会执
 	</li>
 以上只渲染 todos 中未完成的项。
 
-如果你的意图与此相反，是根据条件跳过执行循环，可以将 v-if 放置于包裹元素上（或放置于 <template> 上）。例如：
+
+如果你的意图与此相反，是根据条件跳过执行循环，可以将 \v-if 放置于包裹元素上（或放置于 \<template\ß> 上）。例如：
 
 	<ul v-if="todos.length">
 	  <li v-for="todo in todos">
@@ -378,9 +379,9 @@ v-if 是惰性的(lazy)：如果在初始渲染时条件为 false，它不会执
 	  }
 	})
 
-在行内语句的事件处理器中，有时我们也需要访问原始 DOM 事件对象。可以使用特殊的 $event 变量将它传递给一个方法：
+在行内语句的事件处理器中，有时我们也需要访问原始 DOM 事件对象。可以使用特殊的 \$event 变量将它传递给一个方法：
 
-	<button v-on:click="warn('Form cannot be submitted yet.', $event)">
+	<button v-on:click="warn('Form cannot be submitted yet.', \$event)">
 	  Submit
 	</button>
 	// ...
@@ -595,7 +596,125 @@ radio
 
 组件的 data 选项必须是一个函数，以便每个实例都可以维护「函数返回的数据对象」的彼此独立的数据副本
 
+组件注册有两种方式：**全局注册**和**局部注册**
+### 使用 props 向子组件传递数据
 
+props 是指注册在组件选项上的自定义属性。当一个值，被放置在 props 中，作为其中一个 prop，这个值就会成为组件实例上，一个可访问的属性。
 
+	Vue.component('blog-post', {
+	  props: ['title'],
+	  template: '<h3>{{ title }}</h3>'
+	})
+在预先注册好一个 prop 属性之后，就可以将数据作为自定义属性传递给这个 prop 属性，如下所示：
+
+	<blog-post title="我的 Vue 旅程"></blog-post>
+	<blog-post title="用 Vue 写博客"></blog-post>
+	<blog-post title="Vue 如此有趣"></blog-post>
+	
+然而，在一个应用程序中，你常常会将 data 中的 posts 设为一个数组：
+
+	new Vue({
+	  el: '#blog-post-demo',
+	  data: {
+	    posts: [
+	      { id: 1, title: '我的 Vue 旅程' },
+	      { id: 2, title: '用 Vue 写博客' },
+	      { id: 3, title: 'Vue 如此有趣' },
+	    ]
+	  }
+	})
+
+然后，将每条数据渲染为一个组件：
+
+	<blog-post
+	  v-for="post in posts"
+	  v-bind:key="post.id"
+	  v-bind:title="post.title">
+	  </blog-post>
+### 单个根元素
+
+ every component must have a single root element
+ 
+	 <div class="blog-post">
+	  <h3>{{ post.title }}</h3>
+	  <div v-html="post.content"></div>
+	</div>
+
+### 使用 events 向父组件发送消息
+	<div id="blog-posts-events-demo">
+	  <div :style="{ fontSize: postFontSize + 'em' }">
+	    <blog-post
+	      v-for="post in posts"
+	      v-bind:key="post.id"
+	      v-bind:post="post"
+	    ></blog-post>
+	  </div>
+	</div>
 ---
+	<button v-on:click="$emit('enlarge-text')">
+	  放大文本
+	</button>
+	
+	<blog-post
+	  ...
+	  v-on:enlarge-text="postFontSize += 0.1">
+		</blog-post>
+		
+### 在 event 事件中发送一个值
+有时，想在 event 事件中发送一个特定的值。例如，我们可能想要在 \<blog-post\> 组件自身内部，去控制放大文本字号的间隔。在这种情况下，我们可以使用 \$emit 的第二个参数来提供字号间隔值：
+
+	<button v-on:click="$emit('enlarge-text', 0.1)">
+	  放大文本
+	</button>
+	
+	<blog-post
+	  ...
+	  v-on:enlarge-text="postFontSize += $event"
+	></blog-post>
+
+或者，如果事件处理函数是一个方法：
+
+	<blog-post
+	  ...
+	  v-on:enlarge-text="onEnlargeText"
+	></blog-post>
+然后，这个值会被传入到方法中，作为第一个参数：
+
+	methods: {
+	  onEnlargeText: function (enlargeAmount) {
+	    this.postFontSize += enlargeAmount
+	  }
+	}
+### 在组件中使用 v-model
+
+	<input v-model="searchText">
+等同于如下：
+
+	<input
+	  v-bind:value="searchText"
+	  v-on:input="searchText = $event.target.value">
+	  
+为了组件内部能够有效运行，组件内的 \<input\> 必须：
+
+* 将 value 属性绑定到 value prop
+* 在 input 输入框中，在自定义的 input 事件中，发送一个新的值
+
+这里就是上面所描述的：
+
+	Vue.component('custom-input', {
+	  props: ['value'],
+	  template: `
+	    <input
+	      v-bind:value="value"
+	      v-on:input="$emit('input', $event.target.value)
+	    >
+	  `
+	})
+  现在，我们的 custom-input 组件，应该可以实现 v-model 的完美运行：
+  
+	<custom-input v-model="searchText"></custom-input> 
+	
+### 使用 slots 进行内容分发 
+
 ### vuex
+

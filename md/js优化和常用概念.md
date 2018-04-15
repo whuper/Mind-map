@@ -901,3 +901,22 @@ requireJS是使用创建script元素，通过指定script元素的src属性来�
 
 　　　　
 引用 [https://www.cnblogs.com/ArthurXml/p/6555509.html](https://www.cnblogs.com/ArthurXml/p/6555509.html)
+
+### PhantomJS
+
+有时，我们需要浏览器处理网页，但并不需要浏览，比如生成网页的截图、抓取网页数据等操作。
+
+PhantomJS的功能，就是提供一个浏览器环境的命令行接口，你可以把它看作一个“虚拟浏览器”，除了不能浏览，其他与正常浏览器一样。它的内核是WebKit引擎，不提供图形界面，只能在命令行下使用，我们可以用它完成一些特殊的用途。
+
+PhantomJS是二进制程序，需要安装后使用。
+
+	$ npm install phantomjs -g
+使用下面的命令，查看是否安装成功。
+
+	$ phantomjs --version
+
+REPL环境
+phantomjs提供了一个完整的REPL环境，允许用户通过命令行与PhantomJS互动。键入phantomjs，就进入了该环境。
+
+	$ phantomjs
+这时会跳出一个phantom提示符，就可以输入Javascript命令了。

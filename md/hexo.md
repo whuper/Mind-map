@@ -8,9 +8,11 @@ npm install -g hexo
 
 在_config.yml,进行基础配置(博客名，作者，主题)
 
+### 常用命令
      hexo g
 
      hexo s
+     hexo clean && hexo s
      
 在_config.yml,进行基础配置（deployment）
 

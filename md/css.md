@@ -229,6 +229,60 @@ css
 	    border-right: 100px solid transparent;
     }
 
+## css3动画 
+
+animation ：动画
+
+> 如需在 CSS3 中创建动画，您需要学习 @keyframes 规则。
+> @keyframes 规则用于创建动画
+
+transition：过渡
+
+> CSS3 过渡是元素从一种样式逐渐改变为另一种的效果。
+> 
+> 要实现这一点，必须规定两项内容：
+
+* 规定您希望把效果添加到哪个 CSS 属性上
+* 规定效果的时长
+应用于宽度属性的过渡效果，时长为 2 秒：
+
+		div	{
+			transition: width 2s;
+			-moz-transition: width 2s;	/* Firefox 4 */
+			-webkit-transition: width 2s;	/* Safari 和 Chrome */
+			-o-transition: width 2s;	/* Opera */
+			}
+
+transform：转换
+
+* translate() 元素从其当前位置移动，根据给定的 left（x 坐标） 和 top（y 坐标） 位置参数：
+* rotate() 元素顺时针旋转给定的角度。允许负值，元素将逆时针旋转。
+* scale() 元素的尺寸会增加或减少，根据给定的宽度（X 轴）和高度（Y 轴）参数：
+* skew() 元素翻转给定的角度，根据给定的水平线（X 轴）和垂直线（Y 轴）参数
+* matrix() matrix() 方法把所有 2D 转换方法组合在一起
+
+
+		div	{
+		transform: rotate(30deg);
+		-ms-transform: rotate(30deg);		/* IE 9 */
+		-webkit-transform: rotate(30deg);	/* Safari and Chrome */
+		-o-transform: rotate(30deg);		/* Opera */
+		-moz-transform: rotate(30deg);		/* Firefox */
+		}
+
+> 转换是使元素改变形状、尺寸和位置的一种效果。
+> 您可以使用 2D 或 3D 转换来转换您的元素。
+
+text-shadow: 字体阴影
+
+您能够规定水平阴影、垂直阴影、模糊距离，以及阴影的颜色：
+	
+	h1
+	{
+	text-shadow: 5px 5px 5px #FF0000;
+	}
+
+
 ## less
 
 Node.js 环境中使用 Less ：

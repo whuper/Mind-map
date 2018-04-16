@@ -139,3 +139,7 @@ po主先假设本文的读者是有前端开发经验的工程师，并对企业
 
 
 
+### MVVM 和 MVC
+
+MVVM中的View 和 ViewModel可以互相通信。也就是可以互相调用。
+MVC中的是单向通信。也就是View跟Model，必须通过Controller来承上启下

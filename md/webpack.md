@@ -18,7 +18,7 @@ inline模式下我们访问的URL不用发生变化,启用这种模式分两种�
 > 1 在命令行中添加--inline命令
 > 
 > 2 在webpack.config.js中添加devServer:{inline:true}
-> 
+ 
 #### 2 当以Node.js API启动webpack-dev-server时,我们也需要做两点:
 
 	1 由于webpack-dev-server的配置中无inline选项,我们需要添加webpack-dev-server/client?http://«path»:«port»/到webpack配置的entry入口点中. 	
@@ -110,3 +110,20 @@ webpack 诞生于对 Code Splitting 特性的实现，从 webmake 重写为 webp
 ### mockjs
 
 ### axios
+
+### webpack 插件
+
+html-webpack-plugin 提供html模版
+
+extract-text-webpack-plugin 分离CSS和JS文件
+
+UglifyJsPlugin 压缩JS代码
+
+HotModuleReplacementPlugin
+
+> Hot Module Replacement（HMR）也是webpack里很有用的一个插件，它允许你在修改组件代码后，自动刷新实时预览修改后的效果。
+> 
+> 在webpack中实现HMR也很简单，只需要做两项配置
+> 
+> 在webpack配置文件中添加HMR插件；
+> 在Webpack Dev Server中添加“hot”参数；

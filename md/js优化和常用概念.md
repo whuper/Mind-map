@@ -890,10 +890,11 @@ requireJS是使用创建script元素，通过指定script元素的src属性来�
 	参数: object 要检测的对象. constructor 某个构造函数
 
 	描述:instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
-### hasOwnProperty 和 instanceof
+### isPrototypeOf 和 instanceof
 > 细细品味会发现两者的区别主要是：
 > 
 > A.isPrototypeOf(B) 判断的是A对象是否存在于B对象的原型链之中
+> 
 > A instanceof B  判断的是B.prototype是否存在与A的原型链之中
 > 
 > 所以就有下面的结论：
@@ -920,3 +921,5 @@ phantomjs提供了一个完整的REPL环境，允许用户通过命令行与Phan
 
 	$ phantomjs
 这时会跳出一个phantom提示符，就可以输入Javascript命令了。
+
+### Karma和Jasmine自动化单元测试

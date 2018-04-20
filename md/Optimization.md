@@ -138,6 +138,60 @@ po主先假设本文的读者是有前端开发经验的工程师，并对企业
 　　确保Ajax请求具有长久的Expires头
 
 
+## 你有哪些性能优化的方法
+
+	回答一：
+	
+	（1）、减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存 ，图片服务器。
+	（2）、前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+	（3）、用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
+	（4）、当需要设置的样式很多时设置className而不是直接操作style。
+	（5）、少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+	（6）、避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+	（7）、图片预加载，将样式表放在顶部，将脚本放在底部 加上时间戳。
+	
+	回答二：
+	
+	(3)、避免空的src和href (浏览器在渲染过程中会把 src 属性中的空内容进行加载，直至加载失败，影响 DOMContentLoaded 与 Loaded 事件之间的资源准备过程，拉长了首屏渲染所用的时间)
+	(4)、为文件头指定Expires
+	(5)、使用gzip压缩内容
+	(6)、把CSS放到顶部
+	(7)、把JS放到底部
+	(9)、将CSS和JS放到外部文件中 
+	(10)、避免跳转 
+	(11)、可缓存的AJAX 
+	(12)、使用GET来完成AJAX请求
+
+
+### 解决Ajax缓存问题的方法
+
+#### 1 通过URL添加后缀的方式
+
+本来请求的地址是: /home/action?
+
+加查询参数后缀后:/home/action?ran=Match.Random();
+  
+#### 2 解决这个问题最有效的办法是禁止页面缓存，有以下几种处理方法：
+
+1.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“Cache-Control”,”no-cache”);
+
+2.在服务端加 header(“Cache-Control: no-cache, must-revalidate”);
+
+3.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“If-Modified-Since”,”0″);
+
+
+### 优化系统部署 
+
+怎么优化？
+
+优化方式有很多，读写分离，负载均衡，这方面的东西可以讲上三天三夜。
+
+具体到本问题的范畴内，那就是资源服务器与应用服务器的分离。
+
+粗暴的理解方式就是，就是应用安在应用服务器（一台或者是集群），资源部署在资源服务器（单台或者是集群）
+
+这时候，js以及css的引用就需要更改为绝对URL，指向对应的资源服务器。
+
 
 ### MVVM 和 MVC
 

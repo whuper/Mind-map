@@ -217,6 +217,19 @@ css
 ## flex实现
 ![](../resources/pictures/flex1.png)
 
+## 如何居中div, 如何居中一个浮动元素?
+
+
+(1)、非浮动元素居中：
+
+可以设置 margin:0 auto 令其居中, 定位 ,父级元素text-align:center等等
+
+(2)、浮动元素居中:
+ 
+- 方法一:设置当前div的宽度，然后设置margin-left:50%; position:relative; left:-250px;其中的left是宽度的一半。
+- 方法二:父元素和子元素同时左浮动，然后父元素相对左移动50%，再然后子元素相对左移动-50%。
+- 方法三:position定位等等。
+
 ## css3 三角形
 保留底边框的颜色，其他边框的颜色设置为透明
 
@@ -282,6 +295,51 @@ text-shadow: 字体阴影
 	text-shadow: 5px 5px 5px #FF0000;
 	}
 
+### 清除浮动的几种方法： 
+(1)、额外标签法，<div style="clear:both;"></div>（缺点：不过这个办法会增加额外的标签使HTML结构看起来不够简洁。）
+
+(2)、使用after伪类
+
+	#parent:after{
+	  content:" ";
+	  height:0;
+	  visibility:hidden;
+	  display:block;
+	  clear:both;
+	}
+
+(3)、浮动外部元素
+
+(4)、设置`overflow`为`hidden`或者auto
+
+### 为什么重置浏览器默认样式，如何重置默浏览器认样式
+
+每种浏览器都有一套默认的样式表，即user agent stylesheet，网页在没有指定的样式时，按浏览器内置的样式表来渲染。这是合理的，像word中也有一些预留样式，可以让我们的排版更美观整齐。
+
+不同浏览器甚至同一浏览器不同版本的默认样式是不同的。但这样会有很多兼容问题。
+
+a、最简单的办法：（不推荐使用）*{margin: 0;padding: 0;}。
+
+b、使用CSSReset可以将所有浏览器默认样式设置成一样。
+
+c、normalize：也许有些cssreset过于简单粗暴，有点伤及无辜，**Normalize.css** 是另一个选择。bootstrap已经引用该css来重置浏览器默认样式，比普通的cssreset要精细一些，保留浏览器有用的默认样式，支持包括手机浏览器在内的超多浏览器，同时对HTML5元素、排版、列表、嵌入的内容、表单和表格都进行了一般化。
+
+### 如何产生BFC
+当一个HTML元素满足下面条件的任何一点，都可以产生Block Formatting Context：
+
+- a、float的值不为none
+- b、overflow的值不为visible
+- c、display的值为table-cell, table-caption, inline-block中的任何一个
+- d、position的值不为relative和static
+
+CSS3触发BFC方式则可以简单描述为：在元素定位非static，relative的情况下触发，float也是一种定位方式。
+
+(3)、BFC的作用与特点
+
+- 不和浮动元素重叠，
+- 清除外部浮动，
+- 阻止浮动元素覆盖
+
 
 ## less
 
@@ -304,3 +362,7 @@ npm install -g less
 * 作用域（Scope）
 * 注释（Comments）
 * 导入（Importing）
+
+
+### 如何回答“谈谈浏览器兼容性
+对过时浏览器的兼容性问题是沉重的知识包袱， 关键是这种知识没有延续性，会影响你学习和使用新技术

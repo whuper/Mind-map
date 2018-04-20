@@ -1037,3 +1037,37 @@ Window是类，window是实例，而且通常是单例模式。
 	< true
 
 	window === this
+
+### 内存泄漏
+
+程序的运行需要内存。只要程序提出要求，操作系统或者运行时（runtime）就必须供给内存。
+
+对于持续运行的服务进程（daemon），必须及时释放不再用到的内存。否则，内存占用越来越高，轻则影响系统性能，重则导致进程崩溃。
+
+不再用到的内存，没有及时释放，就叫做内存泄漏（memory leak）。
+
+有些语言（比如 C 语言）必须手动释放内存，程序员负责内存管理。
+
+全局变量引起的内存泄漏
+
+	function leaks(){  
+	    leak = 'xxxxxx';//leak 成为一个全局变量，不会被回收
+	}
+
+闭包引起的内存泄漏
+
+	var leaks = (function(){  
+	    var leak = 'xxxxxx';// 被闭包所引用，不会被回收
+	    return function(){
+	        console.log(leak);
+	    }
+	})()
+
+
+	dom清空或删除时，事件未清除导致的内存泄漏
+	<div id="container">  
+	</div>
+	
+	$('#container').bind('click', function(){
+	    console.log('click');
+	}).remove();

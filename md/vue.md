@@ -598,6 +598,21 @@ radio
 组件的 data 选项必须是一个函数，以便每个实例都可以维护「函数返回的数据对象」的彼此独立的数据副本
 
 组件注册有两种方式：**全局注册**和**局部注册**
+
+### 在组件中使用less
+
+	<style lang='less'>
+	    .test {
+	        width: 100px;
+	        height: 100px;
+	        background: #f00;
+	        .test-item {
+	            width: 50px;
+	            height: 50px;
+	            background: #ff0;
+	        }
+	    } 
+	</style>
 ### 使用 props 向子组件传递数据
 
 props 是指注册在组件选项上的自定义属性。当一个值，被放置在 props 中，作为其中一个 prop，这个值就会成为组件实例上，一个可访问的属性。
@@ -660,6 +675,7 @@ props 是指注册在组件选项上的自定义属性。当一个值，被放�
 	  ...
 	  v-on:enlarge-text="postFontSize += 0.1">
 		</blog-post>
+
 		
 ### 在 event 事件中发送一个值
 有时，想在 event 事件中发送一个特定的值。例如，我们可能想要在 \<blog-post\> 组件自身内部，去控制放大文本字号的间隔。在这种情况下，我们可以使用 \$emit 的第二个参数来提供字号间隔值：

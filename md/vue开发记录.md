@@ -36,3 +36,53 @@ main.js
 ### 计算属性里不能用异步方式改变数据
 
 #### 合理利用created方法
+
+### 在vue中获取dom元素
+
+在vue中可以通过给标签加ref属性，就可以在js中利用ref去引用它
+
+	 <div id="box" ref="mybox">  
+	      DEMO  
+	    </div>  
+
+	this.$refs.mybox.style.color = 'red';  
+
+### 在vue中获取所有路由链接
+
+	import links from '@/router'
+
+	links.options.routes;
+
+### 服务全局可用:
+
+#### vue插件
+
+Vue.js 的插件应当有一个公开方法 install 。这个方法的第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象：
+
+	MyPlugin.install = function (Vue, options) {
+	  // 1. 添加全局方法或属性
+	  Vue.myGlobalMethod = function () {
+	    // 逻辑...
+	  }
+	
+	  // 2. 添加全局资源
+	  Vue.directive('my-directive', {
+	    bind (el, binding, vnode, oldVnode) {
+	      // 逻辑...
+	    }
+	    ...
+	  })
+	
+	  // 3. 注入组件
+	  Vue.mixin({
+	    created: function () {
+	      // 逻辑...
+	    }
+	    ...
+	  })
+	
+	  // 4. 添加实例方法
+	  Vue.prototype.$myMethod = function (methodOptions) {
+	    // 逻辑...
+	  }
+	}

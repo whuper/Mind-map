@@ -1071,3 +1071,87 @@ Window是类，window是实例，而且通常是单例模式。
 	$('#container').bind('click', function(){
 	    console.log('click');
 	}).remove();
+
+### 函数的3种定义方法
+
+#### 1.1 函数声明
+
+	//ES5
+	function getSum(){}
+	function (){}//匿名函数
+	//ES6
+	()=>{}//如果{}内容只有一行{}和return关键字可省,
+#### 1.2 函数表达式(函数字面量)
+
+	//ES5
+	
+	var sum=function getSum(){}
+	//ES6
+	let sum=()=>{}//如果{}内容只有一行{}和return关键字可省,
+#### 1.3 构造函数
+
+	var sum=new GetSum(num1,num2)
+#### 1.4 三种方法的对比
+
+1.函数声明有预解析,而且函数声明的优先级高于变量;
+
+2.使用Function构造函数定义函数的方式是一个函数表达式,这种方式会导致解析两次代码，影响性能。第一次解析常规的JavaScript代码，第二次解析传入构造函数的字符串
+
+### 2.ES5中函数的4种调用
+在ES5中函数内容的this指向和调用方法有关
+
+2.1 函数调用模式
+包括函数名()和匿名函数调用,this指向window
+
+	 function getSum() {
+	    console.log(this) //window
+	 }
+	 getSum()
+	 
+	 (function() {
+	    console.log(this) //window
+	 })()
+	 
+	 var getSum=function() {
+	    console.log(this) //window
+	 }
+	 getSum()
+2.2 方法调用
+对象.方法名(),this指向对象
+
+	var objList = {
+	   name: 'methods',
+	   getSum: function() {
+	     console.log(this) //objList对象
+	   }
+	}
+	objList.getSum()
+2.3 构造器调用
+new 构造函数名(),this指向构造函数
+
+	function Person() {
+	  console.log(this); //指向构造函数Person
+	}
+	var personOne = new Person();
+2.4 间接调用
+利用call和apply来实现,this就是call和apply对应的第一个参数,如果不传值或者第一个值为null,undefined时this指向window
+
+	function foo() {
+	   console.log(this);
+	}
+	foo.apply('我是apply改变的this值');//我是apply改变的this值
+	foo.call('我是call改变的this值');//我是call改变的this值
+
+#### 5.合并数组
+
+let arr1=[1,2,3]; 
+let arr2=[4,5,6]; 
+Array.prototype.push.apply(arr1,arr2); //将arr2合并到了arr1中
+#### 6.求数组最大值
+
+Math.max.apply(null,arr)
+#### 7.判断字符类型
+
+Object.prototype.toString.call({})
+
+## js 设计模式

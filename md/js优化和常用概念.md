@@ -1142,6 +1142,28 @@ new 构造函数名(),this指向构造函数
 	foo.apply('我是apply改变的this值');//我是apply改变的this值
 	foo.call('我是call改变的this值');//我是call改变的this值
 
+
+#### 4.call,apply和bind
+
+- IE5之前不支持call和apply,bind是ES5出来的;
+
+- call和apply可以调用函数,改变this,实现继承和借用别的对象的方法;
+
+#### 4.3 bind
+bind是function的一个函数扩展方法，bind以后代码重新绑定了func内部的this指向,不会调用方法,不兼容IE8
+
+	var name = '李四'
+	 var foo = {
+	   name: "张三",
+	   logName: function(age) {
+	   console.log(this.name, age);
+	   }
+	 }
+	 var fooNew = foo.logName;
+	 var fooNewBind = foo.logName.bind(foo);
+	 fooNew(10)//李四,10
+	 fooNewBind(11)//张三,11  因为bind改变了fooNewBind里面的this指向
+
 #### 5.合并数组
 
 let arr1=[1,2,3]; 
@@ -1154,4 +1176,6 @@ Math.max.apply(null,arr)
 
 Object.prototype.toString.call({})
 
-## js 设计模式
+
+4.call,apply和bind
+1.IE5之前不支持call和apply,bind是ES5出来的;

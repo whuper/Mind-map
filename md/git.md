@@ -4,21 +4,21 @@ SVN是集中式版本控制系统，版本库是集中放在中央服务器的�
 
 Git是分布式版本控制系统，那么它就没有中央服务器的，每个人的电脑就是一个完整的版本库，这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。既然每个人的电脑都有一个完整的版本库，那多个人如何协作呢？比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。
 
-###创建证书使用公钥免密码登录(可选)
+### 创建证书使用公钥免密码登录(可选)
 	ssh-keygen -t rsa
 	vi ~/.ssh/authorized_keys
 
-##配置git提交用户名和邮箱，定义别名方便区分
+## 配置git提交用户名和邮箱，定义别名方便区分
 	git config --global user.name "whuper"
 	git config --global user.email "whuper@163.com"
 
-##初始化Git仓库
+## 初始化Git仓库
 git init --bare sample.git
 
-##在客户端上克隆远程仓库
+## 在客户端上克隆远程仓库
 git clone git@server:/srv/sample.git
 
-##测试推送
+## 测试推送
 	touch README
 	git add README
 	git commit -m "add readme"
@@ -26,7 +26,7 @@ git clone git@server:/srv/sample.git
 
 
 
-#常用命令
+## 常用命令
 	git status
 	git diff readme.txt
 	git log 
@@ -61,10 +61,10 @@ git clone git@server:/srv/sample.git
 	git revert <SHA> 
 
 
-git 如何删除缓存的远程分支列表
+### git 如何删除缓存的远程分支列表
 
 	git remote prune origin
-##Git忽略规则及.gitignore规则不生效的解决办法
+## Git忽略规则及.gitignore规则不生效的解决办法
 
 	git rm -r --cached .
 	git add .
@@ -84,3 +84,4 @@ git 如何删除缓存的远程分支列表
 	git remote add origin https://github.com/whuper/compilations.git
 	git push -u origin master
 
+## git 免密码

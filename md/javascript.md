@@ -114,3 +114,16 @@ map,filter,forEach,some,every等不改变原数组
 
 链接：https://www.imooc.com/article/23750
 
+
+
+###　构造函数,实例与原型对象的关系
+
+![](file:///D:/nodejs/electron/mind-map/resources/pictures/prototype.png)
+
+	var Person = function (name) { this.name = name; }//person是构造函数
+	var o3personTwo = new Person('personTwo')//personTwo是实例
+
+
+![](file:///D:/nodejs/electron/mind-map/resources/pictures/bV8wdm.png)
+
+#### 原型对象都有一个默认的constructor属性指向构造函数

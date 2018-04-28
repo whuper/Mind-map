@@ -118,12 +118,37 @@ map,filter,forEach,some,every等不改变原数组
 
 ###　构造函数,实例与原型对象的关系
 
-![](file:///D:/nodejs/electron/mind-map/resources/pictures/prototype.png)
+![](file:../resources/pictures/prototype.png)
 
 	var Person = function (name) { this.name = name; }//person是构造函数
 	var o3personTwo = new Person('personTwo')//personTwo是实例
 
 
-![](file:///D:/nodejs/electron/mind-map/resources/pictures/bV8wdm.png)
+![](file:../resources/pictures/bV8wdm.png)
 
 #### 原型对象都有一个默认的constructor属性指向构造函数
+
+## new运算符
+
+- 1.创了一个新对象;
+- 2.this指向构造函数;
+- 3.构造函数有返回,会替换new出来的对象,如果没有就是new出来的对象
+
+#### 手动封装一个new运算符
+
+
+	var new2 = function (func) {
+	    var o = Object.create(func.prototype); 　　 //创建对象
+	    var k = func.call(o);　　　　　　　　　　　　　//改变this指向，把结果付给k
+	    if (typeof k === 'object') {　　　　　　　　　//判断k的类型是不是对象
+	        return k;　　　　　　　　　　　　　　　　　 //是，返回k
+	    } else {
+	        return o;　　　　　　　　　　　　　　　　　 //不是返回返回构造函数的执行结果
+	    }
+	}  
+
+#### Object.create()
+Object.create(o)的作用是创建一个空对象，空对象的原型是参数o：
+
+#### new
+new配合构造函数使用，创建一个新对象。

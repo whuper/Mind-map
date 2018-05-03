@@ -636,6 +636,31 @@ Node应用由模块组成，采用CommonJS模块规范。
 	var n = 1;
 	export {n as m};
 
+## Promise的基本用法
+
+声明一个Promise对象
+
+	// 方法1
+	let promise = new Promise ( (resolve, reject) => {
+	    if ( success ) {
+	        resolve(a) // pending ——> resolved 参数将传递给对应的回调方法
+	    } else {
+	        reject(err) // pending ——> rejectd
+	    }
+	} )
+	
+	// 方法2
+	function promise () {
+	    return new Promise ( function (resolve, reject) {
+	        if ( success ) {
+	            resolve(a)
+	        } else {
+	            reject(err)
+	        }
+	    } )
+	}
+
+
 ---
 	The woods are lovely,dark and deep.
 	But I have promises to keep.

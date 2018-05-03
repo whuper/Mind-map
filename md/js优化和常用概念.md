@@ -1179,3 +1179,78 @@ Object.prototype.toString.call({})
 
 4.call,apply和bind
 1.IE5之前不支持call和apply,bind是ES5出来的;
+
+## 同步和异步
+
+所谓同步，是指一个进程必需等待另一个进程的结果。
+
+所谓异步，是指不需要等待其他进程，继续做自己的事件
+
+**静态资源的加载没有异步同步一说（script 例外），浏览器默认都是并行加载静态资源的**
+
+`<script>`标签是同步加载的
+
+加载外部脚本时，浏览器会暂停页面渲染，等待脚本下载并执行完成后，再继续渲染。原因是JavaScript可以修改DOM（比如使用document.write方法），所以必须把控制权让给它。
+
+> 如果外部脚本加载时间很长（比如一直无法完成下载），就会造成网页长时间失去响应，浏览器就会呈现“假死”状态，这被称为“阻塞效应”。
+
+为了避免这种情况，较好的做法是将`<script>`标签都放在页面底部，而不是头部
+
+defer属性
+
+	浏览器开始解析HTML网页
+	解析过程中，发现带有defer属性的script标签
+	浏览器继续往下解析HTML网页，同时并行下载script标签中的外部脚本
+	浏览器完成解析HTML网页，此时再执行下载的脚本
+
+async属性
+
+async属性的作用是，使用另一个进程下载脚本，下载时不会阻塞渲染。(执行是同步的)
+
+	浏览器开始解析HTML网页
+	解析过程中，发现带有async属性的script标签
+	浏览器继续往下解析HTML网页，同时并行下载script标签中的外部脚本
+
+	**脚本下载完成，浏览器暂停解析HTML网页，开始执行下载的脚本**
+
+	脚本执行完毕，浏览器恢复解析HTML网页
+
+async属性可以保证脚本下载的同时，浏览器继续渲染。需要注意的是，一旦采用这个属性，**就无法保证脚本的执行顺序**。哪个脚本先下载结束，就先执行那个脚本。如果同时使用async和defer属性，后者不起作用，浏览器行为由async属性决定。
+
+### token
+
+Token 应该被保存起来（放到 local / session stograge 或者 cookies）
+
+浏览器不支持 session storage 时都应该转存到 cookies 里
+
+### js操作cookie
+
+js设置cookie
+	
+	function setCookie(name,value,time)
+	{
+		var strsec = getsec(time);
+		var exp = new Date();
+		exp.setTime(exp.getTime() + strsec*1);
+		document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+	}
+
+JS读取cookie:
+
+	function getCookie(name) {  
+	    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");  
+	    if(arr=document.cookie.match(reg))  
+	        return unescape(arr[2]);   
+	        return null;  
+	}
+
+js删除cookies
+
+	function delCookie(name)
+	{
+		var exp = new Date();
+		exp.setTime(exp.getTime() - 1);
+		var cval=getCookie(name);
+		if(cval!=null)
+		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+	}

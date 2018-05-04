@@ -60,6 +60,9 @@ git clone git@server:/srv/sample.git
 
 	git revert <SHA> 
 
+### 合并提交记录
+
+合并最近两条: git rebase -i head～2
 
 ### git 如何删除缓存的远程分支列表
 

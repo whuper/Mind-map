@@ -116,9 +116,15 @@ JavaScript （包括 ES 6/7/8）
 
 ### JSONP 的缺点以及安全隐患
 
+- 它只支持GET请求而不支持POST等其它类型的HTTP请求
+- jsonp在调用失败的时候不会返回各种HTTP状态码。
+- 缺点是安全性。万一假如提供jsonp的服务存在页面注入漏洞，即它返回的javascript的内容被人控制的。那么结果是什么？所有调用这个 jsonp的网站都会存在漏洞
+
 ### Async & Await 的使用
 
 ### postMessage 的安全隐患
+
+### token的实现原理
 
 
 ### 前端路由的实现原理

@@ -1,6 +1,6 @@
 ## 回调-钩子 promise和async await
 
-### 回调函数
+### 回调函数(callback)
 
 回调函数的英文解释为：
 
@@ -10,12 +10,32 @@
 
 function A有一个参数function B，function B会在function A执行完成之后被调用执行。
 
+### 钩子函数(hook)
+
+> 钩子的概念源于Windows的消息处理机制，通过设置钩子，应用程序可以对所有的消息事件进行拦截，然后执行钩子函数，对消息进行想要的处理方式。
+
+**钩子函数在捕获消息的第一时间执行**，回调函数不是
+
 ### 钩子函数和回调函数
 
 
 - js派函数监听事件 => 监听函数就是所谓的钩子函数=>函数钩取事件：**函数主动找事件**=>钩子函数
  
 - js预留函数给dom事件，dom事件调用js预留的函数 =>事件派发给函数：**事件调用函数**=>回调函数
+
+### 钩子函数
+	let btn = document.getElementById("btn");
+	btn.onclick = () => {
+	    console.log("i'm a hook");
+	}
+
+### 回调函数
+
+	btn.addEventListener("click",() =>{
+	    console.log(this.onclick);//undefined
+	});
+
+JS由于自身的特殊性（单线程），上面的两段代码都是异步的。
 
 ### Promise
 

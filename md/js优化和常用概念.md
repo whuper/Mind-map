@@ -26,30 +26,6 @@
 
 当然也可以用 isNaN() 函数来检测算数错误，比如用 0 作除数的情况。 
 
-#### 4.判断undefined和null:	
-	
-	var tmp = undefined; 
-	if (tmp== undefined) 
-	{ 
-	alert("null or undefined"); 
-	}
-	
-	var tmp = undefined; 
-	if (tmp== null) 
-	{ 
-	alert("null or undefined"); 
-	}
-说明：null==undefined 
-
-
-#### 5.判断undefined、null与NaN:
-
-	var tmp = null; 
-	if (!tmp) 
-	{ 
-	alert("null or undefined or NaN"); 
-	}
-提示：一般不那么区分就使用这个足够。
 
 ### 手写jsonp
 
@@ -90,7 +66,7 @@
 	
 	})(window,document)
 
-### 手写ajax
+## 手写ajax
 
 #### 创建一个异步调用对象
 
@@ -896,12 +872,26 @@ requireJS是使用创建script元素，通过指定script元素的src属性来�
 > A.isPrototypeOf(B) 判断的是A对象是否存在于B对象的原型链之中
 > 
 > A instanceof B  判断的是B.prototype是否存在与A的原型链之中
-> 
+
+
 > 所以就有下面的结论：
 > 如果 A.isPrototypeOf(B)  返回true 则B instanceof A 一定返回true
 
+
 　　　　
 引用 [https://www.cnblogs.com/ArthurXml/p/6555509.html](https://www.cnblogs.com/ArthurXml/p/6555509.html)
+
+
+
+ 	var array = new Array();
+	//判断 Array.prototype 是否在 array 的原型链中
+	console.log(array instanceof Array); // true
+	console.log(Array.isPrototypeOf(array)); //false
+    console.log(Array.prototype.isPrototypeOf(array)); //true
+
+	
+
+
 
 ### PhantomJS
 

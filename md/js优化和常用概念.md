@@ -1078,9 +1078,9 @@ js设置cookie
 	
 	function setCookie(name,value,time)
 	{
-		var strsec = getsec(time);
-		var exp = new Date();
-		exp.setTime(exp.getTime() + strsec*1);
+	    var Days = 30;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days*24*60*60*1000);
 		document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
 	}
 
@@ -1088,10 +1088,29 @@ JS读取cookie:
 
 	function getCookie(name) {  
 	    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");  
-	    if(arr=document.cookie.match(reg))  
-	        return unescape(arr[2]);   
-	        return null;  
+	    if(arr=document.cookie.match(reg)){ 
+	        return unescape(arr[2]); 
+	        } else {
+	          return null;  
+	        }  
+
 	}
+
+    //"(^| )" 这个匹配开头和空格
+
+##### 分割成数组然后遍历的形式
+
+    function getCookieByArray(name){
+     var cookies = document.cookie.split(';');
+     var list;
+     for(var i=0; i<cookies.length ; i++){
+         list = cookies[i].split('=');
+          if (list[0].replace(' ', '') == name) {
+           return list[1];
+      }
+     }
+    }
+
 
 js删除cookies
 
@@ -1103,3 +1122,76 @@ js删除cookies
 		if(cval!=null)
 		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 	}
+	
+### Dom优化方案
+
+如下的这些DOM操作会导致重绘或重排：
+
+- 增加、删除和修改可见DOM元素
+
+- 页面初始化的渲染
+
+- 移动DOM元素
+
+- 修改CSS样式，改变DOM元素的尺寸
+
+- DOM元素内容改变，使得尺寸被撑大
+
+- 浏览器窗口尺寸改变
+
+> 现代浏览器会针对重排或重绘做性能优化，比如，把DOM操作积累一批后统一做一次重排或重绘。
+
+>但在有些情况下，浏览器会立即重排或重绘。比如请求如下的DOM元素布局信息：offsetTop/Left/Width/Height、scrollTop/Left/Width/Height、clientTop/Left/Width/Height、getComputedStyle()
+
+DOM操作带来的页面重绘或重排是不可避免的，但可以遵循一些最佳实践来降低由于重排或重绘带来的影响。
+
+如下是一些具体的实践方法：
+
+#### 1. 合并多次的DOM操作为单次的DOM操作
+
+    element.style.cssText += 'border: 1px solid #f00;';
+    
+#### 2. 把DOM元素离线或隐藏后修改
+
+    - 使用文档片段
+    - 通过设置DOM元素的display样式为none来隐藏元素
+    
+3. 设置具有动画效果的DOM元素的position属性为fixed或absolute
+
+4. 谨慎取得的DOM元素的布局信息
+5. 使用事件托管方式绑定事件
+
+**在Chrome上createElement比innerHTML快**
+
+    var start = new Date().getTime() ;
+    var test = document.getElementById("test") ;
+    
+    for(var i = 0 ; i < 1000 ; i ++){
+        test.innerHTML += "<div></div>" ;
+    }
+    
+    console.log("innerHTML:" + (new Date().getTime() - start)) ;
+    document.getElementById("test").innerHTML = "" ;
+    
+    start = new Date().getTime() ;
+    
+    for(var i = 0 ; i < 1000 ; i ++){
+        test.appendChild(document.createElement("div")) ;
+    }
+    
+    console.log("createElement:" + (new Date().getTime() - start)) ;
+ 
+#### 3. 使用选择器方法替代传统方法
+
+**querySelectorAll** 方法返回满足条件的所有节点
+
+**querySelector** 返回满足条件的第一个节点。
+
+使用这两个方法来替代我们以前经常用的getElementById，getElementsByTagName等方法也是提高性能的一个途径。
+
+#### 4. 事件代理
+越多的事件绑定页面就加载越慢并且占用更多内存，同时绑定太多事件也会使得代码的可读性降低。
+
+使用事件代理的方法原理就是把事件绑定到元素的父节点,在处理函数中判断target
+
+根据不同的target执行不同的逻辑。这样能很大程度的减少绑定是事件数量,并且提高代码的简洁度。

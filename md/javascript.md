@@ -114,8 +114,66 @@ map,filter,forEach,some,every等不改变原数组
 
 链接：https://www.imooc.com/article/23750
 
+## 数组去重
 
+#### 1. es6的set
 
+    var arr = [1,2,3,3,4,5,5];
+    var set = new Set(arr);
+    var newArr = Array.from(set);
+ or   
+ 
+    [...new Set(arr)]
+
+> ES6提供了数据结构Set。类似于数组，但是没有重复值。
+
+> 可用于数组去重`[...new Set(array)]`
+>
+> Array.from()方法可以将Set结构转换为数组`Array.from(new Set(array))`
+
+#### 2.
+ 定义一个变量数组 res 保存结果，遍历需要去重的数组，如果该元素已经存在在 res 中了，则说明是重复的元素，如果没有，则放入 res 中
+
+    function unique(a) {
+      var res = [];
+    
+      for (var i = 0, len = a.length; i < len; i++) {
+        var item = a[i];
+    
+     for (var j = 0, jLen = res.length; j < jLen; j++) {
+          if (res[j] === item)
+            break;
+        }
+    
+        if (j === jLen)
+          res.push(item);
+      }
+    
+      return res;
+    }
+    
+#### 3. ES5 提供的 Array.prototype.indexOf 
+
+    function unique(a) {  
+      var res = [];  
+      
+      for (var i = 0, len = a.length; i < len; i++) {  
+        var item = a[i];  
+      
+        (res.indexOf(item) === -1) && res.push(item);  
+      }  
+      
+      return res;  
+    }  
+#### 4. ES5 的filter
+
+    function unique(arr) {        
+      var res = arr.filter(function(item, index, array) {  
+        return array.indexOf(item) === index;  
+      });          
+      return res;  
+    }  
+  
 ###　构造函数,实例与原型对象的关系
 
 ![](file:../resources/pictures/prototype.png)

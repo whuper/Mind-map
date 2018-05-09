@@ -39,10 +39,10 @@
 	var debounce = function(idle, action){
 	  var last
 	  return function(){
-	    var ctx = this, args = arguments
+	    var _this = this, args = arguments
 	    clearTimeout(last)
 	    last = setTimeout(function(){
-	        action.apply(ctx, args)
+	        action.apply(_this, args)
 	    }, idle)
 	  }
 	}
@@ -69,7 +69,7 @@
 
 
 	var throttle = function(delay, action){
-	  var last = 0return function(){
+	  var last = return function(){
 	    var curr = +new Date()
 	    if (curr - last > delay){
 	      action.apply(this, arguments)

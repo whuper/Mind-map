@@ -61,7 +61,7 @@
 	        document.body.appendChild(scriptEle);
 	    }
 	
-	    // 因为jsonp是一个私有函数外部不能调用，所有jsonp函数作文window对象的一个方法，供外部调用
+	    // 因为jsonp是一个私有函数外部不能调用，所有jsonp函数作为window对象的一个方法，供外部调用
 	    window.$jsonp = jsonp;
 	
 	})(window,document)
@@ -104,7 +104,7 @@
 	                 return xmlHttpRequest;  
 	             }
 
-###get代码
+### get代码
 
 	function get(){  
 	    var req = createXMLHTTPRequest();  
@@ -123,7 +123,7 @@
 	    }  
 	}
 
-###POST代码
+### POST代码
 
 	function post(){  
 	    var req = createXMLHTTPRequest();  
@@ -1190,8 +1190,19 @@ DOM操作带来的页面重绘或重排是不可避免的，但可以遵循一�
 使用这两个方法来替代我们以前经常用的getElementById，getElementsByTagName等方法也是提高性能的一个途径。
 
 #### 4. 事件代理
-越多的事件绑定页面就加载越慢并且占用更多内存，同时绑定太多事件也会使得代码的可读性降低。
 
-使用事件代理的方法原理就是把事件绑定到元素的父节点,在处理函数中判断target
+- 越多的事件绑定页面就加载越慢并且占用更多内存，同时绑定太多事件也会使得代码的可读性降低。
 
-根据不同的target执行不同的逻辑。这样能很大程度的减少绑定是事件数量,并且提高代码的简洁度。
+- 使用事件代理的方法原理就是把事件绑定到元素的父节点,在处理函数中判断target
+
+- 根据不同的target执行不同的逻辑。这样能很大程度的减少绑定是事件数量,并且提高代码的简洁度。
+
+### 当call/apply传的第一个参数为null/undefined的时候js函数内执行的上下文对象是什么呢？
+
+这其实在es5中就有解释的：传入null/undefined的时候将执行js全局对象浏览器中是window，其他环境是global。
+
+### 区分数组还是对象
+
+第一种：
+
+	Object.prototype.toString.call(a).slice(8,-1) == 'Array' ? [] : {}

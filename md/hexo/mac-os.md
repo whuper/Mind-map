@@ -33,3 +33,86 @@ sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinst
 > 第一种相对比较简单，开机的时候按住`command+r`，等待他下载完成。
 >
 > `(格式化格式一定要选择GUID模式！！！千万别选ASPF格式)`
+
+
+
+#### 验证dmg文件
+
+> 打开 应用程序 – 实用工具 – 终端
+>
+> 先输入 md5 空格
+> 然后将 InstallESD.dmg 拖拽到终端窗口内
+> 随后回车验证MD5
+
+
+## mac下Homebrew的安装与使用
+
+安装XCode或者Command Line Tools for Xcode,Xcode可以从AppStore里下载安装
+
+`Command Line Tools for Xcode`需要在终端中输入以下代码运行安装：
+
+```sh
+xcode-select --install
+```
+
+安装Homebrew
+
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+移除Homebrew
+
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+```
+
+基本使用
+
+
+```sh
+// 搜索包
+brew search mysql
+
+// 安装包
+brew install mysql
+
+// 查看包信息，比如目前的版本，依赖，安装后注意事项等
+brew info mysql
+
+// 卸载包
+brew uninstall wget
+
+// 显示已安装的包
+brew list
+
+// 查看brew的帮助
+brew –help
+
+// 更新， 这会更新 Homebrew 自己
+brew update
+
+// 检查过时（是否有新版本），这会列出所有安装的包里，哪些可以升级
+brew outdated
+brew outdated mysql
+
+// 升级所有可以升级的软件们
+brew upgrade
+brew upgrade mysql
+
+// 清理不需要的版本极其安装包缓存
+brew cleanup
+```
+
+
+## How to download XCode for MAC 10.11.6
+
+I am searching for a proper IDE for iOS developement but MAC OS X version is 10.11.6 & because of this I am unable to install XCode. It says "I should have MAC OS X 10.12+"
+
+
+
+>Go here for other downloads including older versions of Xcode:
+
+>developer.apple.com/download/more 
+
+>I think you can use version 8.2.1 for OS X 10.11.6.

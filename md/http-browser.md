@@ -127,7 +127,7 @@ Client收到FIN后，Client进入**TIME_WAIT**状态，接着发送一个ACK给S
  
 当你请求上面的一些属性的时候，浏览器为了给你最精确的值，需要flush队列，因为队列中可能会有影响到这些值的操作。即使你获取元素的布局和样式信息跟最近发生或改变的布局信息无关，浏览器都会强行刷新渲染队列。
 
-减少重绘和回流：   
+#### 减少重绘和回流：   
 1. 直接改变className，如果动态改变样式，则使用cssText（考虑没有优化的浏览器）  
 2. 让要操作的元素进行”离线处理”，处理完后一起更新  
 
@@ -219,15 +219,6 @@ Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，�
 强缓存	从缓存取	200（from cache）	否，直接从缓存取
 协商缓存	从缓存取	304（Not Modified）	否，通过服务器来告知缓存是否可用
 
-### 用户行为对缓存的影响
-
-用户操作				Expires/Cache-Control	Last-Modied/Etag
-地址栏回车			有效							有效
-页面链接跳转			有效							有效
-新开窗口				有效							有效
-前进回退				有效							有效
-F5刷新				无效							有效
-Ctrl+F5强制刷新		无效							无效
 
 ### 判断当前浏览器类型
 
@@ -247,7 +238,7 @@ Ctrl+F5强制刷新		无效							无效
  
     }
 
-### ajax通讯的5中readyStae状态
+### ajax通讯的5种readyStae状态
 0. (Uninitialized) the send( ) method has not yet been invoked. 
 1. (Loading) the send( ) method has been invoked, request in progress. 
 2. (Loaded) the send( ) method has completed, entire response received. 

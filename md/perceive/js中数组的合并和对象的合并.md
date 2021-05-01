@@ -38,10 +38,13 @@
 	var obj1= {'a': 1};
 	var obj2= {'b': 1};
 	var c = $.extend(obj1, obj2);
-	1
+
 	console.log(obj1); // {a: 1, b: 1}  obj1已被修改
-	1
-	//或者 <br>var obj3 = $.extend({}, obj1, obj2) <br>console.log(obj3); //{a: 1, b: 1} 不会改变obj1,obj2
+
+	//或者 
+	
+	var obj3 = $.extend({}, obj1, obj2) 	  
+	console.log(obj3); //{a: 1, b: 1} 不会改变obj1,obj2
  
 ### 遍历赋值
 

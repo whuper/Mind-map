@@ -63,7 +63,16 @@ Promise对象的状态改变，只有两种可能：
 
 这两种情况只要发生，状态就凝固了，不会再变了，这时就称为resolved（已定型）
 
-基本用法
+
+---
+
+
+>  pending -> resolve方法 -> fulfilled
+
+>  pending -> reject方法 -> rejected
+
+ 
+#### 基本用法
 ES6规定，Promise对象是一个构造函数，用来生成Promise实例
 
 	const promist = new Promise(function(resolve,reject){
@@ -74,7 +83,7 @@ ES6规定，Promise对象是一个构造函数，用来生成Promise实例
 	    }
 	})
 
-resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去； 
+resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 fulfilled），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去； 
 reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
 
 Promise 实例生成以后，可以用then 方法分别指定resolved状态和rejected状态的回调函数。

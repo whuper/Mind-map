@@ -29,13 +29,19 @@ JavaScript 中，万物皆对象！但对象也是有区别的。
 ##三. 原型对象
 
 在 JavaScript 中，每当定义一个对象（函数也是对象）时候，对象中都会包含一些预定义的属性。其中每个函数对象都有一个prototype 属性，这个属性指向函数的原型对象。
-    function Person() {}
+
+    function Person() {
+    
+    }
+    
     Person.prototype.name = 'Zaxlct';
     Person.prototype.age  = 28;
     Person.prototype.job  = 'Software Engineer';
+    
     Person.prototype.sayName = function() {
       alert(this.name);
     }
+    
       
     var person1 = new Person();
     person1.sayName(); // 'Zaxlct'

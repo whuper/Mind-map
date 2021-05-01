@@ -1052,19 +1052,18 @@ bind是function的一个函数扩展方法，bind以后代码重新绑定了func
 
 #### 5.合并数组
 
-let arr1=[1,2,3]; 
-let arr2=[4,5,6]; 
-Array.prototype.push.apply(arr1,arr2); //将arr2合并到了arr1中
+	let arr1=[1,2,3]; 
+	let arr2=[4,5,6]; 
+	Array.prototype.push.apply(arr1,arr2); //将arr2合并到了arr1中
 #### 6.求数组最大值
 
-Math.max.apply(null,arr)
+	Math.max.apply(null,arr)
+	
 #### 7.判断字符类型
 
-Object.prototype.toString.call({})
+	Object.prototype.toString.call({})
 
 
-4.call,apply和bind
-1.IE5之前不支持call和apply,bind是ES5出来的;
 
 ### token
 

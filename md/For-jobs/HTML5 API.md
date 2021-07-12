@@ -161,20 +161,24 @@ canvas 拥有多种绘制路径、矩形、圆形、字符以及添加图像的�
 每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题
 
 ### 三者的异同
-###cookie
-- 一般由服务器生成，可设置失效时间。如果在浏览器端生成Cookie，默认是关闭浏览器后失效
+
+### cookie
+
+- 一般由服务器生成，可设置失效时间。**如果在浏览器端生成Cookie，默认是关闭浏览器后失效**
 - 存放数据大小,4K左右
 - 每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题
-- 需要程序员自己封装，源生的Cookie接口不友好
+- 需要程序员自己封装，原生的Cookie接口不友好
 
-###localStorage	
+### localStorage	
+
 - 除非被清除，否则永久保存
 - 一般为5MB
 - 仅在客户端（即浏览器）中保存，不参与和服务器的通信
 - 源生接口可以接受，亦可再次封装来对Object和Array有更好的支持
 
-###sessionStorage
-- 仅在当前会话下有效，关闭页面或浏览器后被清除
+### sessionStorage
+
+- 仅在当前会话下有效，**关闭页面或浏览器**后被清除
 - 一般为5MB
 - 仅在客户端（即浏览器）中保存，不参与和服务器的通信
 - 源生接口可以接受，亦可再次封装来对Object和Array有更好的支持
@@ -192,11 +196,11 @@ localStorage 方法存储的数据没有时间限制。第二天、第二周或�
 	document.write(localStorage.lastname);
 
 	//setItem && getItem
-	sessionStorage.setItem("key", "value");     localStorage.setItem("site", "js8.in");
-	var value = sessionStorage.getItem("key");     
+	localStorage.setItem("key", "value");     localStorage.setItem("site", "js8.in");
+	var value = localStorage.getItem("key");     
 	var site = localStorage.getItem("site");
 
-	sessionStorage.removeItem("key");     
+	localStorage.removeItem("key");     
 	localStorage.removeItem("site");
 
 ### sessionStorage 方法

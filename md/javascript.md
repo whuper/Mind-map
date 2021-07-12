@@ -14,7 +14,16 @@
 
 **exec()**
 
+
 exec() 方法用于检索字符串中的正则表达式的匹配。
+
+```
+var str="Hello world!";
+//查找"Hello"
+var patt=/Hello/g;
+var result=patt.exec(str);
+
+```
 
 该函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。
 
@@ -63,12 +72,6 @@ exec() 方法用于检索字符串中的正则表达式的匹配。
 	\w：匹配包括下划线的任何单词字符。等价于'[A-Za-z0-9_]'。
 
 
-### js的基本数据类型
-
-基本数据类型有五种Undefined、Null、Boolean、Number和String，也叫做简单的数据类型
-
-还有一种复杂的数据类型是**Object**，但**不属于基本数据类型**。
-
 #### 字符串常用的函数
 
 其实在控制台打印一下就有了的
@@ -104,15 +107,54 @@ exec() 方法用于检索字符串中的正则表达式的匹配。
 - sort() 对数组的元素进行排序 ##
 - splice() 删除元素，并向数组添加新元素。 ##
 - split() 分割数组
-
 - toString() 把数组转换为字符串，并返回结果。
-
 - unshift() 向数组的开头添加一个或更多元素，并返回新的长度。 ##
 - valueOf() 返回数组对象的原始值。
 
-map,filter,forEach,some,every等不改变原数组
+  > map,filter,forEach,some,every等不改变原数组??
+
 
 链接：https://www.imooc.com/article/23750
+
+## map foreach filter reduce之间的区别
+
+### 结果（返回值）不一样
+
+forEach()结果是undefined；map和filter结果是Array，但是filter不会改变原始数组，只会返回一个新数组；reduce结果是单个值。
+
+### 返回值不同
+
+前面讲的结果（返回值）是指方法的返回值，这里要讲的是回调函数的返回值。
+
+forEach的回调函数不需要返回值，在jQuery的each方法中使用return false来打断循环，但在forEach里面，return无效，无论如何，都会完全遍历整个数组的所有元素。
+
+reduce的回调函数返回值是一个单纯的值，如果是求数值的和的话，就是一个数字。
+
+map的回调函数返回值也是一个值，但这个值将直接替换当前遍历到的这个元素，从而引发原始数组的改变。如果元素是一个对象的话，应该尽可能做到对象结构的不变，只是属性或方法内容的改变。
+
+filter的回调函数的返回值是一个boolean值，为true时保留这个元素，为false时filter的返回值中不包括这个元素。（filter不会对数组自己进行修改，而是返回一个新数组。）
+
+
+#### map会改变原始数组吗
+
+正常情况不会, 除非**在循环里面直接把原数组改了**
+
+> 对象是引用类型, 传递的是地址,  item.key = index 会修改原数组中的 对象
+
+https://segmentfault.com/q/1010000018683143
+
+
+### 使用场景不同
+
+forEach用于看，map用于改，filter用于删，reduce用于统计。
+
+forEach除了上面讲到的return无效，continue/break等也无效。
+
+
+从参数的角度讲，map、filter和forEach是一样的
+
+https://www.tangshuang.net/2875.html
+
 
 ## 数组去重
 
@@ -173,16 +215,20 @@ map,filter,forEach,some,every等不改变原数组
       });          
       return res;  
     }  
-  
-###　构造函数,实例与原型对象的关系
-
-![](file:../resources/pictures/prototype.png)
-
-	var Person = function (name) { this.name = name; }//person是构造函数
-	var o3personTwo = new Person('personTwo')//personTwo是实例
 
 
-![](file:../resources/pictures/bV8wdm.png)
+
+### 构造函数,实例与原型对象的关系
+
+![](./images/prototype.png)
+
+	var M = function (name) { 
+      this.name = name; 
+    }   //M是构造函数
+
+	var o3 = new M('o3') //o3是实例
+
+![](./images/bV8wdm.png)
 
 #### 原型对象都有一个默认的constructor属性指向构造函数
 
@@ -190,7 +236,7 @@ map,filter,forEach,some,every等不改变原数组
 
 - 1.创了一个新对象;
 - 2.this指向构造函数;
-- 3.构造函数有返回,会替换new出来的对象,如果没有就是new出来的对象
+- 3.构造函数有返回,会替换new出来的对象, 如果没有就是new出来的对象
 
 #### 手动封装一个new运算符
 

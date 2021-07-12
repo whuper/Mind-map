@@ -1,11 +1,11 @@
 ## PhantomJS
 
-¡¡¡¡PhantomJSÊÇÒ»¸ö»ùÓÚwebkitµÄJavaScript API¡£ËüÊ¹ÓÃQtWebKit×÷ÎªËüºËÐÄä¯ÀÀÆ÷µÄ¹¦ÄÜ£¬Ê¹ÓÃwebkitÀ´±àÒë½âÊÍÖ´ÐÐJavaScript´úÂë¡£ÈÎºÎÄã¿ÉÒÔÔÚ»ùÓÚwebkitä¯ÀÀÆ÷×öµÄÊÂÇé£¬Ëü¶¼ÄÜ×öµ½¡£
+ã€€ã€€PhantomJSæ˜¯ä¸€ä¸ªåŸºäºŽwebkitçš„JavaScript APIã€‚å®ƒä½¿ç”¨QtWebKitä½œä¸ºå®ƒæ ¸å¿ƒæµè§ˆå™¨çš„åŠŸèƒ½ï¼Œä½¿ç”¨webkitæ¥ç¼–è¯‘è§£é‡Šæ‰§è¡ŒJavaScriptä»£ç ã€‚ä»»ä½•ä½ å¯ä»¥åœ¨åŸºäºŽwebkitæµè§ˆå™¨åšçš„äº‹æƒ…ï¼Œå®ƒéƒ½èƒ½åšåˆ°ã€‚
 
-Ëü²»½öÊÇ¸öÒþÐÎµÄä¯ÀÀÆ÷£¬Ìá¹©ÁËÖîÈçCSSÑ¡ÔñÆ÷¡¢Ö§³ÖWeb±ê×¼¡¢DOM²Ù×÷¡¢JSON¡¢HTML5¡¢Canvas¡¢SVGµÈ£¬Í¬Ê±Ò²Ìá¹©ÁË´¦ÀíÎÄ¼þI/OµÄ²Ù×÷£¬´Ó¶øÊ¹Äã¿ÉÒÔÏò²Ù×÷ÏµÍ³¶ÁÐ´ÎÄ¼þµÈ¡£
+å®ƒä¸ä»…æ˜¯ä¸ªéšå½¢çš„æµè§ˆå™¨ï¼Œæä¾›äº†è¯¸å¦‚CSSé€‰æ‹©å™¨ã€æ”¯æŒWebæ ‡å‡†ã€DOMæ“ä½œã€JSONã€HTML5ã€Canvasã€SVGç­‰ï¼ŒåŒæ—¶ä¹Ÿæä¾›äº†å¤„ç†æ–‡ä»¶I/Oçš„æ“ä½œï¼Œä»Žè€Œä½¿ä½ å¯ä»¥å‘æ“ä½œç³»ç»Ÿè¯»å†™æ–‡ä»¶ç­‰ã€‚
 
-PhantomJSµÄÓÃ´¦¿ÉÎ½·Ç³£¹ã·º£¬ÖîÈçÍøÂç¼à²â¡¢ÍøÒ³½ØÆÁ¡¢ÎÞÐèä¯ÀÀÆ÷µÄ Web ²âÊÔ¡¢Ò³Ãæ·ÃÎÊ×Ô¶¯»¯µÈ
+PhantomJSçš„ç”¨å¤„å¯è°“éžå¸¸å¹¿æ³›ï¼Œè¯¸å¦‚ç½‘ç»œç›‘æµ‹ã€ç½‘é¡µæˆªå±ã€æ— éœ€æµè§ˆå™¨çš„ Web æµ‹è¯•ã€é¡µé¢è®¿é—®è‡ªåŠ¨åŒ–ç­‰
 
-ÏÂÔØµØÖ·
+ä¸‹è½½åœ°å€
 
 http://npm.taobao.org/dist/phantomjs/

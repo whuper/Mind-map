@@ -12,14 +12,16 @@
 
 	var tmp = null; 
 	if (!tmp && typeof(tmp)!="undefined" && tmp!=0){ 
-	alert("null"); 
+		alert("null"); 
 	}
+
 ### 3.判断NaN:
 	
 	var tmp = 0/0; 
 	if(isNaN(tmp)){ 
-	alert("NaN"); 
+		alert("NaN"); 
 	}
+
 说明：如果把 NaN 与任何值（包括其自身）相比得到的结果均是 false，所以要判断某个值是否是 NaN，不能使用 == 或 === 运算符。 
 
 提示：isNaN() 函数通常用于检测 parseFloat() 和 parseInt() 的结果，以判断它们表示的是否是合法的数字。
@@ -154,7 +156,7 @@ JavaScript：this是什么？
 看例子：
 
 	function to_green(){
-	this.style.color="green";
+		this.style.color="green";
 	}
 	to_green();
 
@@ -168,8 +170,8 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 我们在改一下。
 
 	window.load=function(){
-	var example=document.getElementById("example");
-	example.onclick=to_green;
+	var example = document.getElementById("example");
+		example.onclick = to_green;
 	}
 这时this又是什么呢？
 
@@ -195,7 +197,7 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 
 **this的指向是由它所在函数调用的上下文决定的，而不是由它所在函数定义的上下文决定的。**
 
-##作用域
+## 作用域
 
 什么是块级作用域呢？
 
@@ -217,6 +219,7 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 			}
 		printf("%d/n",j);
 	}
+
 运行这段代码，会出现“use an undefined variable:j”的错误。可以看到，C语言拥有块级作用域，因为j是在if的语句块中定义的，因此，它在块外是无法访问的。
 而JS是如何表现的呢，再看另一个demo:
 
@@ -243,6 +246,7 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 	alert(i);
 	}
 	test();
+
 这时候再次运行，会弹出"i"未定义的错误， 我们把for语句块放到了一个闭包之中，然后调用这个函数，当函数调用完毕，变量i自动销毁，因此，我们在块外便无法访问了。
 
 在JS中，为了防止命名冲突，我们应该尽量避免使用全局变量和全局函数。那么，该如何避免呢？正如上文demo所示，我们可以把要定义的所有内容放入到一个
@@ -255,6 +259,7 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 
 
 ## js闭包
+
 	　function f1(){
 	　　　　n=999;
 	　　　　function f2(){
@@ -277,6 +282,7 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 
 
 ### 事件冒泡与事件捕获
+
 > 
 如果父div有click事件, div里的span也有click事件, 默认你点span的时候父div的click事件也会被激发, 如果你不想激发父div的click事件, 就在span的click事件中stopPropagation()
 事件冒泡与事件捕获:   
@@ -859,13 +865,27 @@ requireJS是使用创建script元素，通过指定script元素的src属性来�
 
 3 in 判断是否在某个对象里
 
-4 instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。
-	
+4 `instanceof` 运算符用于检测构造函数的 prototype 属性是否出现在某个**实例对象**的原型链上。
+
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof
+
 	语法: object instanceof constructor
 
 	参数: object 要检测的对象. constructor 某个构造函数
 
-	描述:instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
+
+```
+Object.prototype.isPrototypeOf()
+isPrototypeOf() 方法用于测试一个对象是否存在于另一个对象的原型链上。
+
+isPrototypeOf() 与 instanceof 运算符不同。在表达式 "object instanceof AFunction"中，object 的原型链是针对 AFunction.prototype 进行检查的，而不是针对 AFunction 本身。
+
+语法
+prototypeObj.isPrototypeOf(object)
+
+
+```
+
 ### isPrototypeOf 和 instanceof
 > 细细品味会发现两者的区别主要是：
 > 
@@ -877,7 +897,6 @@ requireJS是使用创建script元素，通过指定script元素的src属性来�
 > 所以就有下面的结论：
 > 如果 A.isPrototypeOf(B)  返回true 则B instanceof A 一定返回true
 
-
 　　　　
 引用 [https://www.cnblogs.com/ArthurXml/p/6555509.html](https://www.cnblogs.com/ArthurXml/p/6555509.html)
 
@@ -888,9 +907,6 @@ requireJS是使用创建script元素，通过指定script元素的src属性来�
 	console.log(array instanceof Array); // true
 	console.log(Array.isPrototypeOf(array)); //false
     console.log(Array.prototype.isPrototypeOf(array)); //true
-
-	
-
 
 
 ### PhantomJS
@@ -1027,6 +1043,12 @@ new 构造函数名(),this指向构造函数
 	}
 	foo.apply('我是apply改变的this值');//我是apply改变的this值
 	foo.call('我是call改变的this值');//我是call改变的this值
+
+> 注意, 第二个参数没传数组，会报错误。
+> 这其实在es5中就有解释的：传入null/undefined的时候将执行js全局对象浏览器中是window，其他环境是global。这样就解释得通了。
+
+apply有两个作用: 1是动态改变上下文执行环境(this的指向) 2是借用了构造函数
+
 
 
 #### 4.call,apply和bind

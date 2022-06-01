@@ -35,6 +35,8 @@ function A有一个参数function B，function B会在function A执行完成之�
 	    console.log(this.onclick);//undefined
 	});
 
+> 上面的两个例子有些片面, 只能说分别是钩子函数和回调函数的一种应用
+
 JS由于自身的特殊性（单线程），上面的两段代码都是异步的。
 
 ### Promise

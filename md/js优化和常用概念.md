@@ -57,6 +57,7 @@
 	            callback(data);
 	            // 处理完回调函数的数据之后，删除jsonp的script标签
 	            document.body.removeChild(scriptEle);
+				delete window[cbFuncName];
 	        }
 	
 	        // 5.append到页面中
@@ -67,6 +68,21 @@
 	    window.$jsonp = jsonp;
 	
 	})(window,document)
+
+```
+<script src="http://jsonp.js?v=1.0&q=apple&callback=getdata"></script>
+
+//调用callback函数，并以json数据形式作为阐述传递，完成回调
+//jsonp.js文件代码
+getdata({message:"success"});
+
+```
+
+callback函数只是在前端页面定义 服务端输出的js脚本里调用执行, 让浏览器误以为是在调用函数
+
+#### jsonp原理 挂载回调函数
+
+> callback函数只是在前端页面定义 
 
 ## 手写ajax
 
@@ -271,7 +287,7 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 	　　result(); // 999
 
 
-当内部函数 在定义它的作用域 的外部 被引用时,就创建了该内部函数的闭包 ,如果内部函数引用了位于外部函数的变量,当外部函数调用完毕后,这些变量在内存不会被 释放,因为闭包需要它们. 
+当内部函数 在定义它的作用域 的外部 被引用时,就创建了该内部函数的闭包 ,如果内部函数引用了位于外部函数的变量,当外部函数调用完毕后,这些变量在内存不会被释放,因为闭包需要它们. 
 
 
 ### 【事件的代理/委托】的原理以及优缺点，这是靠事件的冒泡机制来实现的，优点是
@@ -283,8 +299,7 @@ OK，this就是指的window对象了，to_green中执行语句也就变为，win
 
 ### 事件冒泡与事件捕获
 
-> 
-如果父div有click事件, div里的span也有click事件, 默认你点span的时候父div的click事件也会被激发, 如果你不想激发父div的click事件, 就在span的click事件中stopPropagation()
+> 如果父div有click事件, div里的span也有click事件, 默认你点span的时候父div的click事件也会被激发, 如果你不想激发父div的click事件, 就在span的click事件中stopPropagation()
 事件冒泡与事件捕获:   
 
 事件冒泡是一个从后代节点向祖先节点冒泡的过程，这个可以理解吧。   
@@ -495,8 +510,6 @@ BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述�
 缺点：
 
 
-
-
 - 要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中
 - 无法实现多继承
 - 来自原型对象的引用属性是所有实例共享的（详细请看附录代码： 示例1）
@@ -687,7 +700,7 @@ BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述�
 
 ## 理解事件、事件处理函数、钩子函数、回调函数
 
-*  js派函数监听事件	=>监听函数就是所谓的钩子函数=>函数钩取事件：函数主动找事件=>钩子函数* 
+*  js派函数监听事件	=>监听函数就是所谓的钩子函数=>函数钩取事件：函数主动找事件=>钩子函数
 *  js预留函数给dom事件，dom事件调用js预留的函数 =>事件派发给函数：事件调用函数=>回调函数
 
 
@@ -698,6 +711,7 @@ js通过监听函数得知事件的过程即是钩取，对应的函数就是钩
 钩子函数和回调函数都是事件处理函数
 
 ## commonjs规范
+
 1、CommonJs规范的出发点：JS没有模块系统、标准库较少、缺乏包管理工具；为了让JS可以在任何地方运行，以达到Java、C#、PHP这些后台语言具备开发大型应用的能力； 
 
 2、在CommonJs规范中：
@@ -712,7 +726,6 @@ js通过监听函数得知事件的过程即是钩取，对应的函数就是钩
 4、\_\_dirname代表当前模块文件所在的文件夹路径，__filename代表当前模块文件所在的文件夹路径+文件名; 
 
 5、require（同步加载）基本功能：读取并执行一个JS文件，然后返回该模块的exports对象，如果没有发现指定模块会报错;
- 
 
 6、模块内的exports：为了方便，node为每个模块提供一个exports变量，其指向module.exports，相当于在模块头部加了这句话：var exports = module.exports，在对外输出时，可以给exports对象添加方法，**PS：不能直接赋值（因为这样就切断了exports和module.exports的联系**）;
 

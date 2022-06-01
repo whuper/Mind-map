@@ -107,6 +107,14 @@ JavaScript （包括 ES 6/7/8）
 
 4. 常见代码优化手段
 
+* 尽量避免全局变量
+* 最小化语句数  
+* 优化循环
+* 使用innerHTML。
+* 使用事件委托
+* 使用数组和对象字面量, 不要使用构造函数
+
+
 5. Web 性能优化手段
 
 6. MVC 与 MVVM 的理解
@@ -129,9 +137,30 @@ JavaScript （包括 ES 6/7/8）
 
 ### 前端路由的实现原理
 
+#### hash 实现
+hash 是 URL 中 hash (#) 及后面的那部分，常用作锚点在页面内进行导航，改变 URL 中的 hash 部分不会引起页面刷新
+
+通过 hashchange 事件监听 URL 的变化，改变 URL 的方式只有这几种：通过浏览器前进后退改变 URL、通过<a>标签改变 URL、通过window.location改变URL，这几种情况改变 URL 都会触发 hashchange 事件
+
+
 ### 对象合并
 
+遍历赋值法 
+Object.assign()
+JQuery的extend
+
 ### 回调函数，Promise,async/await三者的区别
+
+https://www.cnblogs.com/onesea/p/13488697.html
+
+
+这种写法非常「同步」，所以我们认为 async / await 就是 Promise 的语法糖。
+
+解决异步流程问题，promise是约定，而async更优雅。
+区别
+
+Promise是es6里的，async是es7了
+
 
 ### es6 新增的 symbol 对象
 
@@ -157,3 +186,24 @@ JavaScript （包括 ES 6/7/8）
 - 事件循环：事件循环是指主线程重复从消息队列中取消息、执行的过程。
 
 
+
+
+### 招 web 初级，中级，高级前端如何判断技术标准，熟练使用 vue，怎么界定？
+
+web 初级：根据设计图切静态页，会 jQuery，会 todlist，熟悉常用标签，懂盒子模型。
+
+web 中级：会 vue，会 c3 动画，懂原型链，懂事件代理，懂闭包，懂节流、防抖，会 es6。
+
+web 高级：熟悉 vue，懂原理，能写简化版 vue。熟练 c3 动画，过度动画，熟练 flex 布局，grid 布局，圣杯布局。熟练 es6，懂微任务宏任务，能手写轮子，会 class，懂 http 协议，懂数据类型和算法。
+
+熟练使用 vue：
+1，深入理解 MVVM 模型，深入理解组件化。
+2，会自定义指令，过滤器，事件修饰符，按键修饰符，keepalIve。
+3，组件传值方法，至少 5 中。
+4，了解声明周期。
+5，懂 vuex 原理，状态管理取值方式至少三中。
+6，router 守卫。
+7，封装组件。
+
+
+> 发布于：2021年04月01日

@@ -1,4 +1,4 @@
-##　正则表达式
+## 正则表达式
 
 	var patt1 = new RegExp("e"); //RegExp 对象
 	var patt = /e/; //简写

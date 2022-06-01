@@ -93,3 +93,35 @@
 > 它会把setInterval的回调函数放在队列中，等浏览器窗口再次打开时，一瞬间全部执行时
 
 目前一般认为的最佳方案是：用setTimeout模拟setInterval，或者特殊场合直接用requestAnimationFrame
+
+
+
+深入理解JavaScript事件循环机制
+https://www.cnblogs.com/yugege/p/9598265.html
+
+
+
+
+
+## JS 的执行顺序是怎样的？是宏任务先还是微任务先？
+
+> 第一次事件循环中，JavaScript 引擎会把整个 script 代码当成一个宏任务执行，
+> 执行完成之后，再检测本次循环中是否寻在微任务，存在的话就依次从微任务的任务队列中读取执行完所有的微任务，
+> 再读取宏任务的任务队列中的任务执行，再执行所有的微任务，
+> 如此循环。JS 的执行顺序就是每次事件循环中的宏任务-微任务。
+
+https://www.cnblogs.com/yqx0605xi/p/9267827.html
+
+### macro-task 主要包含：
+
+script( 整体代码)、setTimeout、setInterval、I/O、UI 交互事件、setImmediate(Node.js 环境)
+
+### micro-task主要包含：
+
+Promise、MutaionObserver、process.nextTick(Node.js 环境)
+
+
+### promise的then属于回调函数吗 ?
+
+不属于
+

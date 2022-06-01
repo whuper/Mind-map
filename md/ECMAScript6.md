@@ -1,5 +1,7 @@
 ## ECMAScript 6(ES2015 )
 
+European Computer Manufacturers Association Script, 欧洲计算机制造商协会
+
 ### 1 ECMAScript 和 JavaScript 的关系
 前者是后者的规格，后者是前者的一种实现
 
@@ -139,6 +141,7 @@ es6模板字符简直是开发者的福音啊，解决了ES5在字符串功能�
     let s = 'he'
     console.log(s.repeat(3)) // 'hehehe'
     //如果你带入小数, Math.floor(num) 来处理
+
 ### 3.函数  箭头函数
 
 函数默认参数
@@ -196,6 +199,7 @@ ES6很有意思的一部分就是函数的快捷写法。也就是箭头函数�
         return fullName
     } 
     //如果缺少()或者{}就会报错
+
 ### 4.拓展的对象功能
 
 对象初始化简写
@@ -264,6 +268,7 @@ ES5我们提取对象中的信息形式如下：
     const [first, second] = color
     console.log(first) //'red'
     console.log(second) //'blue'
+    
 ### 6.Spread Operator 展开运算符
 
 ES6中另外一个好玩的特性就是Spread Operator 也是三个点儿...接下来就展示一下它的用途。
@@ -536,6 +541,7 @@ list是类数组对象，而我们通过使用展开运算符使之变成了数�
 ## CommonJs模块规范和ES6模块规范
 
 #### 一.CommonJs模块：
+
 模块化规范中，每个文件就是一个模块，有自己的作用域。在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见。
 
 首先我们要明白一个前提，CommonJS模块规范和ES6模块规范完全是两种不同的概念。
@@ -586,12 +592,16 @@ Node应用由模块组成，采用CommonJS模块规范。
 
 需要特别注意的是，**export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。**
 
+```
 	// 报错
 	export 1;
 	
 	// 报错
 	var m = 1;
 	export m;
+
+```    
+
 上面两种写法都会报错，因为没有提供对外的接口。第一种写法直接输出 1，第二种写法通过变量m，还是直接输出 1。**1只是一个值，不是接口**。
 
 正确的写法是下面这样。

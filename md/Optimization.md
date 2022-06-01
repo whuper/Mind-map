@@ -197,3 +197,5 @@ po主先假设本文的读者是有前端开发经验的工程师，并对企业
 
 MVVM中的View 和 ViewModel可以互相通信。也就是可以互相调用。
 MVC中的是单向通信。也就是View跟Model，必须通过Controller来承上启下
+
+MVC和MVVM的区别并不是VM完全取代了C，只是在MVC的基础上增加了一层VM，只不过是弱化了C的概念，ViewModel存在目的在于抽离Controller中展示的业务逻辑，而不是替代Controller，其它视图操作业务等还是应该放在Controller中实现。也就是说MVVM实现的是业务逻辑组件的重用，使开发更高效，结构更清晰，增加代码的复用性。

@@ -8,6 +8,7 @@ DOM操作比非DOM交互需要更多的内存和CPU时间，连续尝试进行�
 **函数节流**，简单地讲，就是让一个函数无法在很短的时间间隔内连续调用，只有当上一次函数执行后过了你规定的时间间隔，才能进行下一次该函数的调用
 
 ### 原理
+
 当触发一个事件时，先setTimout让这个事件延迟一会再执行，如果在这个时间间隔内又触发了事件，就clear掉原来的定时器，再setTimeout一个新的定时器延迟一会执行。
 
 **2018 05-09更新 (其实这个应该叫做函数去抖debounce)**
@@ -31,6 +32,7 @@ DOM操作比非DOM交互需要更多的内存和CPU时间，连续尝试进行�
 
 impress用的是另一个封装函数：
 
+```
 	var throttle = function(fn, delay){
 	 	var timer = null;
 	 	return function(){
@@ -41,6 +43,9 @@ impress用的是另一个封装函数：
 	 		}, delay);
 	 	};
 	 };
+
+```	 
+
 它使用闭包的方法形成一个私有的作用域来存放定时器变量timer。而调用方法为
 
 	window.onresize = throttle(myFunc, 100);
@@ -49,6 +54,13 @@ impress用的是另一个封装函数：
 
 以上参考
 [http://www.alloyteam.com/2012/11/javascript-throttle/](http://www.alloyteam.com/2012/11/javascript-throttle/)
+
+### js arguments 关键字
+
+arguments对象只有函数开始时才可用。
+
+虽然arguments对象并不是一个数组，但是访问单个参数的方式与访问数组元素的方式相同
+
 
 ### 相关问题
 ---
@@ -152,8 +164,9 @@ PRG设计模式并不适用所有的重复提交情况，比如：
 
 4）用户恶意避开客户端预防多次提交手段，进行重复数据提交。
 
-###3 使用session／token设置令牌
+### 3 使用session／token设置令牌
 
 产生页面时，服务器为每次产生的Form分配唯一的随机标识号(比如时间戳)，并且在form的一个隐藏字段中设置这个标识号，同时在当前用户的Session中保存这个标识号。
 
 当提交表单时，服务器比较hidden和session中的标识号是否相同，相同则继续，处理完后清空Session，否则服务器忽略请求。
+

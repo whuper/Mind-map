@@ -47,6 +47,7 @@ inline模式下我们访问的URL不用发生变化,启用这种模式分两种�
 ### (Hot Module Replacement)热模块替换
 
 #### 在命令行中运行inline模式，并启用热模块替换
+
 这里只需要多增加 --hot指令就OK了.如下所示.
 
 ```
@@ -102,7 +103,8 @@ webpack 诞生于对 Code Splitting 特性的实现，从 webmake 重写为 webp
 
 可见对一项看起来不起眼的技术的深入探索是非常值得的，也许某个伟大的开源作品就在探索中诞生了。
 
-## PostCSS 
+## PostCSS
+
 它提供了一种方式用 JavaScript 代码来处理 CSS。
 
 **它负责把 CSS 代码解析成抽象语法树结构（Abstract Syntax Tree，AST），再交由插件来进行处理**。
